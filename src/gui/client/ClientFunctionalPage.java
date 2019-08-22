@@ -6,26 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClientFunctionalPage extends JFrame {
+    JLabel label;
+    JTextField textField;
+    JButton buttonOK;
+    JLabel labelResult;
 
-    ClientFunctionalPage(String text){
+    public ClientFunctionalPage(ClientGUI clientGUI){
         setLayout(new FlowLayout());
-        JLabel labelDelete = new JLabel("The word you want to " + text + " :");
-        JTextField textField = new JTextField(20);
-        JButton button = new JButton("OK");
-        JLabel label = new JLabel("Resultt");
-        add(labelDelete);
-        add(textField);
-        add(button);
-        add(label);
-
-        setVisible(true);
+        label = new JLabel();
+        textField = new JTextField(20);
+        buttonOK = new JButton("OK");
+        labelResult = new JLabel("Result");
         setSize(400, 400);
         setDefaultCloseOperation(3);
-        addReturnButton();
     }
-    private void addReturnButton(){
-        JButton returnButton = new JButton("Return");
-        add(returnButton);
-        returnButton.setBounds(20,20,20,20);
+    public void initialiseWindow(){
+        add(label);
+        add(textField);
+        add(buttonOK);
+        add(labelResult);
     }
 }
