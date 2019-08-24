@@ -1,8 +1,11 @@
 package gui.client;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
     JTextArea textArea;
@@ -26,8 +29,8 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
     public void initialiseWindow(){
         add(label);
         add(textField);
+        addMeaningText();
         add(buttonOK);
-//        add(labelResult);
         add(textArea);
     }
 
@@ -46,5 +49,24 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
                 clientGUI.getjFrame().toFront();
             }
         });
+    }
+    private void addMeaningText(){
+        JTextField meaning = new JTextField("Please enter the meaning here", 20);
+        meaning.setFont(setFont());
+        meaning.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                meaning.setText("");
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Nothing
+            }
+        });
+        add(meaning);
+    }
+    private Font setFont(){
+        Font font = new Font("Arial", Font.ITALIC,10);
+        return font;
     }
 }
