@@ -25,12 +25,11 @@ public class ClientGUI {
     public static void main (String args[]){
         ClientGUI clientGUI = new ClientGUI();
         clientGUI.setFucntions(clientGUI);
-        clientGUI.addListener(clientGUI.buttons, clientGUI);
-
+        clientGUI.addListener(clientGUI);
     }
 
 
-    private void addListener(HashMap<String,JButton> buttons, ClientGUI clientGUI){
+    public void addListener(ClientGUI clientGUI){
         Iterator iterator = buttons.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry mapElement = (Map.Entry)iterator.next();
@@ -64,7 +63,7 @@ public class ClientGUI {
         }
     }
 
-    private void setFucntions(ClientGUI clientGUI) {
+    public void setFucntions(ClientGUI clientGUI) {
         jFrame = new JFrame("HelloWorld");
         jFrame.setSize(400,400);
 //        clientGUI.panelMain.setBounds(0,0,400,400);

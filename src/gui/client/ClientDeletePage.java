@@ -1,6 +1,8 @@
 package gui.client;
 
-public class ClientDeletePage extends  ClientFunctionalPage{
+//import process.ProcessData;
+
+public class ClientDeletePage extends  ClientFunctionalPage {
 
     public ClientDeletePage(String function, ClientGUI clientGUI){
         super(clientGUI);
@@ -18,4 +20,12 @@ public class ClientDeletePage extends  ClientFunctionalPage{
         addTextOnField("Please enter the word here:");
         add(buttonOK);
     }
+//    @Override
+//    public ProcessData getInputClient(){
+//        ProcessData processData = new ProcessData();
+//
+//
+//
+//        return processData;
+//    }
 }
