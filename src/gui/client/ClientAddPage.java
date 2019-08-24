@@ -28,8 +28,9 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
     @Override
     public void initialiseWindow(){
         add(label);
-        add(textField);
-        addMeaningText();
+//        add(textField); // Enter the word
+        addText("Please enter the word here");  // Enter the word you want to add.
+        addText("Please enter the meaning here"); // Enter the meaning of the word.
         add(buttonOK);
         add(textArea);
     }
@@ -50,8 +51,8 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
             }
         });
     }
-    private void addMeaningText(){
-        JTextField meaning = new JTextField("Please enter the meaning here", 20);
+    private void addText(String text){
+        JTextField meaning = new JTextField(text, 20);
         meaning.setFont(setFont());
         meaning.addFocusListener(new FocusListener() {
             @Override
@@ -61,12 +62,13 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
             @Override
             public void focusLost(FocusEvent e) {
                 // Nothing
+                meaning.setText(text);
             }
         });
         add(meaning);
     }
     private Font setFont(){
-        Font font = new Font("Arial", Font.ITALIC,10);
+        Font font = new Font("Arial", Font.ITALIC,15);
         return font;
     }
 }

@@ -26,4 +26,5 @@ public class ClientFunctionalPage extends JFrame {
         add(buttonOK);
         add(labelResult);
     }
+
 }
