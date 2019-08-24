@@ -29,8 +29,6 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
         add(buttonOK);
 //        add(labelResult);
         add(textArea);
-
-
     }
 
     @Override
