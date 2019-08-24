@@ -35,15 +35,12 @@ public class ClientGUI {
         while(iterator.hasNext()){
             Map.Entry mapElement = (Map.Entry)iterator.next();
             // Add eventListener to link to other frames/pages.
-            System.out.println(mapElement);
-            System.out.println((String)mapElement.getKey());
-            System.out.println(((String)mapElement.getKey()).equals("Delete"));
             switch ((String)mapElement.getKey()){
                 case "Delete":
                     ((JButton)mapElement.getValue()).addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-//                            new ClientFunctionalPage(clientGUI);
+                            new ClientDeletePage("delete", clientGUI);
                         }
                     });
                     continue;
@@ -59,9 +56,10 @@ public class ClientGUI {
                     ((JButton)mapElement.getValue()).addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-//                            new ClientFunctionalPage(clientGUI);
+                            new ClientSearchPage("search",clientGUI);
                         }
                     });
+                    continue;
             }
         }
     }

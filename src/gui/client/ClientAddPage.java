@@ -7,12 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
+public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
-    JButton returnButton;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
-        label.setText("Enter the word you want to " +function +": ");
+        label.setText("Please enter the word you want to " +function +": ");
         textArea = new JTextArea("Notice that the first line is the word you want to add, the " +
                 "second line is the meaning you want to add. The word should not exist in the dictionary.  ");
         textArea.setColumns(30);
@@ -21,7 +20,10 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
         textArea.setLineWrap(true);
 
         initialiseWindow();
-        addReturnButton(clientGUI);
+
+        super.addReturnButton(clientGUI);
+        add(returnButton);
+
         setVisible(true);
 
     }
@@ -29,8 +31,8 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
     public void initialiseWindow(){
         add(label);
 //        add(textField); // Enter the word
-        addText("Please enter the word here");  // Enter the word you want to add.
-        addText("Please enter the meaning here"); // Enter the meaning of the word.
+        addTextOnField("Please enter the word here");  // Enter the word you want to add.
+        addTextOnField("Please enter the meaning here"); // Enter the meaning of the word.
         add(buttonOK);
         add(textArea);
     }
@@ -38,37 +40,5 @@ public class ClientAddPage extends ClientFunctionalPage implements PageFunction{
     @Override
     public void errorHandling() {
 
-    }
-
-    @Override
-    public void addReturnButton(ClientGUI clientGUI) {
-        returnButton = new JButton("Return");
-        add(returnButton);
-        returnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clientGUI.getjFrame().toFront();
-            }
-        });
-    }
-    private void addText(String text){
-        JTextField meaning = new JTextField(text, 20);
-        meaning.setFont(setFont());
-        meaning.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                meaning.setText("");
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                // Nothing
-                meaning.setText(text);
-            }
-        });
-        add(meaning);
-    }
-    private Font setFont(){
-        Font font = new Font("Arial", Font.ITALIC,15);
-        return font;
     }
 }
