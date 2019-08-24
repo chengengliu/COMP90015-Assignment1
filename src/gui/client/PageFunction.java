@@ -1,7 +1,9 @@
 package gui.client;
 
+import javax.swing.*;
+
 public interface PageFunction {
     public void errorHandling();
     public void addReturnButton(ClientGUI clientGUI);
-    public void addTextOnField(String text);
+    public JTextField addTextOnField(String text);
 }

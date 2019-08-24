@@ -1,14 +1,13 @@
 package gui.client;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
+    JTextField jTextField1;
+    JTextField jTextField2;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
         label.setText("Please enter the word you want to " +function +": ");
@@ -25,14 +24,16 @@ public class ClientAddPage extends ClientFunctionalPage{
         add(returnButton);
 
         setVisible(true);
-
+        update();
     }
     @Override
     public void initialiseWindow(){
         add(label);
 //        add(textField); // Enter the word
-        addTextOnField("Please enter the word here");  // Enter the word you want to add.
-        addTextOnField("Please enter the meaning here"); // Enter the meaning of the word.
+        jTextField1 = addTextOnField("Please enter the word here");  // Enter the word you want to add.
+//        add(jTextField1);
+        jTextField2 = addTextOnField("Please enter the meaning here"); // Enter the meaning of the word.
+//        add(jTextField2);
         add(buttonOK);
         add(textArea);
     }
@@ -40,5 +41,19 @@ public class ClientAddPage extends ClientFunctionalPage{
     @Override
     public void errorHandling() {
 
+    }
+    private void update(){
+        buttonOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(jTextField1.getText());
+            }
+        });
+        buttonOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(jTextField2.getText());
+            }
+        });
     }
 }

@@ -42,7 +42,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     }
 
     @Override
-    public void addTextOnField(String text) {
+    public JTextField addTextOnField(String text) {
 
         JTextField meaning = new JTextField(text, 20);
         meaning.setFont(setFont());
@@ -54,10 +54,11 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
             @Override
             public void focusLost(FocusEvent e) {
                 // Nothing
-                meaning.setText(text);
+//                meaning.setText(text);
             }
         });
         add(meaning);
+        return meaning;
     }
 
     public Font setFont(){
