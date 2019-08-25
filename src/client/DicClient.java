@@ -17,22 +17,21 @@ public class DicClient {
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private Socket socket;
-    public DicClient(){
-
+    private DicClient(){
     }
 
     public static void main(String args[]){
         DicClient client = new DicClient();
         // Connect to the server.
         client.connect(args);
-
         // Start GUI.
         EventQueue.invokeLater(new Runnable(){
             public void run(){
                 try{
-                    ClientGUI clientGUI = new ClientGUI();
-                    clientGUI.setFucntions(clientGUI);
+                    ClientGUI clientGUI = new ClientGUI(client.socket,
+                            client.bufferedReader,client.printWriter);
                     clientGUI.addListener(clientGUI);
+                    clientGUI.setFucntions(clientGUI); // setVisible and start GUI.
                 } catch (Exception e){
                     e.printStackTrace();
                 }

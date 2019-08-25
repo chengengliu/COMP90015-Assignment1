@@ -5,6 +5,7 @@ import exceptions.EmptyInputException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ClientSearchPage extends ClientFunctionalPage implements  PageFunction{
     JTextArea textArea;
@@ -43,13 +44,21 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     if(word.equals("")|| word.equals("please enter the word here")){
                         throw new EmptyInputException();
                     }
+                    clientGUI.printWriter.println("Search");
+                    clientGUI.printWriter.println(word);
+                    String output = clientGUI.bufferedReader.readLine(); // Later this will be the returning message.
+                    System.out.println(output);
                 }catch (EmptyInputException ee){
+                    ee.printStackTrace();
+                }catch (IOException ee){
                     ee.printStackTrace();
                 }catch (Exception ee){
                     ee.printStackTrace();
                 }
+                // Now the input is valid and is not empty.
             }
         });
+
 
     }
 

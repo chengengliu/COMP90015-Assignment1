@@ -80,16 +80,14 @@ public class DicServer {
         }
         System.out.println("Start Listening: ");
         while (true){
-            Socket client = null;
+            Socket client;
             try {
                 client = listening.accept();
                 clientsNumber++;
                 System.out.println("Now the server and the client have established the connection. ");
                 // Threading start.
                 ServerThread serverThread = new ServerThread(dictionary,this, client);
-                Thread thread = new Thread(serverThread);
-                thread.start();
-
+                new Thread(serverThread).start();
             } catch (IOException e){
                 e.printStackTrace();
                 break;

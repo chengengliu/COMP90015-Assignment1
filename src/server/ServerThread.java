@@ -38,13 +38,25 @@ public class ServerThread implements Runnable{
 
             }catch (IOException e){
                 e.printStackTrace();
+            }catch (NullPointerException e){
+                e.printStackTrace();
             }
             switch (flag){
                 case "Search":
                     if(dictionary.contain(word)){
-                        // Write out meaning from line to line. If the meaning has multiple lines.
+                        System.out.println("Now Enter the Search part. ");
+                        printWriter.println("HelloWorld");
+                        // Write out meaning from line to line. If the meaning has multiple lines
+
+                        //TODO: 这里我觉得不对。。 因为事先不知道有多大的array，所以会触及到boundry 之外的。。
                         for(int i=0; i< DicServer.WORD_ROW; i++){
-                            printWriter.println(dictionary.meaning(word)[i]);
+                            try {
+                                printWriter.println(dictionary.meaning(word)[i]);
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                e.printStackTrace();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                             System.out.println("Word looking for meaning is: " + word);
                             System.out.println("Word meaning is : " + dictionary.meaning(word)[i]);
                         }

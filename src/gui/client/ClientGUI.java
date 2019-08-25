@@ -3,6 +3,9 @@ package gui.client;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,21 +18,22 @@ public class ClientGUI {
     private JFrame jFrame;
     private HashMap<String, JButton> buttons;
 
-    public ClientGUI() {
+    public BufferedReader bufferedReader;
+    private Socket socket;
+    public PrintWriter printWriter;
+
+    public ClientGUI(Socket socket, BufferedReader bufferedReader, PrintWriter printWriter) {
+        this.socket = socket;
+        this.bufferedReader = bufferedReader;
+        this.printWriter = printWriter;
+    }
+
+    public void addListener(ClientGUI clientGUI){
         buttons = new HashMap<String, JButton>();
         buttons.put("Search", buttonSearch);
         buttons.put("Add", buttonAdd);
         buttons.put("Delete", buttonDelete);
-    }
 
-    public static void main (String args[]){
-        ClientGUI clientGUI = new ClientGUI();
-        clientGUI.setFucntions(clientGUI);
-        clientGUI.addListener(clientGUI);
-    }
-
-
-    public void addListener(ClientGUI clientGUI){
         Iterator iterator = buttons.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry mapElement = (Map.Entry)iterator.next();

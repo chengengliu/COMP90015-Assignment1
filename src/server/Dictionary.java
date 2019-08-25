@@ -12,12 +12,24 @@ public class Dictionary {
     }
     // Test if there is a word contained in the dictionary.
     public boolean contain(String word){
-//        if(dictionary.get(word)!=null){
-//            return true;
-//        }
-//        return false;
         return dictionary.get(word)!=null;
     }
+    // Sample input is:
+    // Abaddon (n.) Hell; the bottomless pit.
+    // "Abaft (adv.) Toward the stern; aft; as, to go abaft."
+    // This parser will be able to separate the word and the defeinition.
+    private static void formatParser(){
+        String test = "Abaddon (n.) Hell; the bottomless pit.\n";
+        String[] tokens = test.split(" ");
+        String word = tokens[0];
+        String[] meaning = new String[tokens.length-1];
+        for(int i=0; i < tokens.length-1; i++){
+            meaning[i] = tokens[i];
+        }
+        for (int i =0; i<meaning.length; i++){
+            System.out.println(meaning[i]);
+        }
+     }
     private void defaultDictionary(){
         String word1= "hello";
         String[] meaning1 = {"exclamation: hello; exclamation: hallo; exclamation: hullo"};
