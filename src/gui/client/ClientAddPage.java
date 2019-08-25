@@ -60,8 +60,11 @@ public class ClientAddPage extends ClientFunctionalPage{
                     String word, meaning;
                     word = jTextFieldWord.getText().toLowerCase();
                     meaning = jTextFieldMeaning.getText().toLowerCase();
-//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
-//                    System.out.println(jTextFieldMeaning.getText()); // meaning
+
+                    // What if the user enter?????
+                    // After testing it seems all good. Enter will not effect the String.
+                    System.out.println(jTextFieldWord.getText()); // word entered by the user
+                    System.out.println(jTextFieldMeaning.getText()); // meaning
 
                     if(word.equals("please enter the word here")|| word.equals("")) {
                         System.out.println("The word you entered is not correct");

@@ -9,16 +9,26 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class DicServer {
-    private static int port = 12345; // default value
-    private static String address =null;
-    private static int clientsNumber =0;
+    private int port = 12345; // default value
+    private String address =null;
+    private int clientsNumber =0;
     private ServerSocket listening;
-    public static void main (String args[]){
-        validatePortNumber(args);
-        validateAddress(args);
+
+    public DicServer(){
+        startServerGUI();
     }
 
-    private static void validatePortNumber(String[] args){
+
+    public static void main (String args[]){
+
+        DicServer dicServer = new DicServer();
+        dicServer.validatePortNumber(args);
+        dicServer.validateAddress(args);
+        dicServer.connect();
+    }
+
+
+    private void validatePortNumber(String[] args){
         try{
             port = Integer.parseInt(args[0]);
             if(port > 65535 || port <=1042){
@@ -41,7 +51,7 @@ public class DicServer {
 
     }
 
-    private static void validateAddress(String[] args){
+    private void validateAddress(String[] args){
         try{
             address = args[1];
             File dicFile = new File(address);
@@ -58,7 +68,7 @@ public class DicServer {
 
     private void connect(){
         try {
-            listening = new ServerSocket(DicServer.port);
+            listening = new ServerSocket(port);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -67,21 +77,31 @@ public class DicServer {
             Socket client = null;
             try {
                 client = listening.accept();
-                DicServer.clientsNumber++;
+                clientsNumber++;
+                System.out.println("Now the server and the client have established the connection. ");
                 // Threading start.
-
-
+//                ServerThread serverThread = new ServerThread(this, client);
+//                Thread thread = new Thread(serverThread);
+//                thread.start();
 
             } catch (IOException e){
                 e.printStackTrace();
+                break;
+            } catch (Exception e){
+                e.printStackTrace();
+                break;
             }
         }
     }
+
     public void disconnect(){
-        DicServer.clientsNumber--;
+        clientsNumber--;
     }
 
     private static void defaultHostHandle(){
+
+    }
+    private void startServerGUI(){
 
     }
 }
