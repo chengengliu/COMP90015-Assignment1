@@ -6,5 +6,5 @@ public interface PageFunction {
     public void errorHandling();
     public void addReturnButton(ClientGUI clientGUI);
     public JTextField addTextOnField(String text);
-    public JOptionPane addSecondConfirm();
+    public int addSecondConfirm();
 }

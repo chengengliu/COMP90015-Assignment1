@@ -70,9 +70,11 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     public void errorHandling() {
 
     }
+
+    // Default is yes. YES_OPTION is 0.
     @Override
-    public JOptionPane addSecondConfirm(){
-        return null;
+    public int addSecondConfirm(){
+        return 0;
     }
 
 

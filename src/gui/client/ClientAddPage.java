@@ -1,14 +1,17 @@
 package gui.client;
 
+import exceptions.EmptyInputException;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
-    JTextField jTextField1;
-    JTextField jTextField2;
+    JTextField jTextFieldWord;
+    JTextField jTextFieldMeaning;
     ClientGUI clientGUI;
+    JOptionPane jOptionPane;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
         this.clientGUI = clientGUI;
@@ -32,10 +35,10 @@ public class ClientAddPage extends ClientFunctionalPage{
     public void initialiseWindow(){
         add(label);
 //        add(textField); // Enter the word
-        jTextField1 = addTextOnField("Please enter the word here");  // Enter the word you want to add.
-//        add(jTextField1);
-        jTextField2 = addTextOnField("Please enter the meaning here"); // Enter the meaning of the word.
-//        add(jTextField2);
+        jTextFieldWord = addTextOnField("Please enter the word here");  // Enter the word you want to add.
+//        add(jTextFieldWord);
+        jTextFieldMeaning = addTextOnField("Please enter the meaning here"); // Enter the meaning of the word.
+//        add(jTextFieldMeaning);
         add(buttonOK);
         add(textArea);
     }
@@ -45,22 +48,40 @@ public class ClientAddPage extends ClientFunctionalPage{
 
     }
     private void update(){
-        String word, meaning;
+        // Add listener on ButtonOK, to listen if the user end entering.
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(jTextField1.getText());
-                System.out.println(jTextField2.getText());
-                addSecondConfirm();
+                System.out.println(jTextFieldWord.getText()); // word entered by the user
+                System.out.println(jTextFieldMeaning.getText()); // meaning
+                int yes = addSecondConfirm();
+                try{
+                    String word, meaning;
+                    word = jTextFieldWord.getText().toLowerCase();
+                    meaning = jTextFieldMeaning.getText().toLowerCase();
+                    if(word.equals("please enter the word here")|| word.equals("")) {
+                        System.out.println("The word you entered is not correct");
+                        throw new EmptyInputException();
+                    }
+                    if(meaning.equals("please enter the meaning here")|| meaning.equals("")) {
+                        System.out.println("The meaning you entered is not correct");
+                        throw new EmptyInputException();
+                    }
+                } catch (EmptyInputException ee) {
+                    ee.printStackTrace();
+                } catch (Exception ee){
+                    ee.printStackTrace();
+                }
             }
         });
     }
     @Override
-    public JOptionPane addSecondConfirm(){
-        JOptionPane jOptionPane = new JOptionPane();
-        jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Add the new word and meaning or not? ", "Add",
-                jOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+    public int addSecondConfirm(){
+        jOptionPane = new JOptionPane();
+        int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Add the new word and meaning or not? ", "Add",
+                jOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         add(jOptionPane);
-        return jOptionPane;
+//        System.out.println(yes); //yes is zero.
+        return yes;
     }
 }
