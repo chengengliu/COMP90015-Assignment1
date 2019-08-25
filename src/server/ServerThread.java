@@ -34,7 +34,6 @@ public class ServerThread implements Runnable{
             try{
                 flag= breader.readLine();
                 word = breader.readLine();
-                meaning = breader.readLine();
 
             }catch (IOException e){
                 e.printStackTrace();
@@ -48,8 +47,7 @@ public class ServerThread implements Runnable{
                         printWriter.println("HelloWorld");
                         // Write out meaning from line to line. If the meaning has multiple lines
 
-                        //TODO: 这里我觉得不对。。 因为事先不知道有多大的array，所以会触及到boundry 之外的。。
-                        for(int i=0; i< DicServer.WORD_ROW; i++){
+                        for(int i=0; i< dictionary.meaning(word).length; i++){
                             try {
                                 printWriter.println(dictionary.meaning(word)[i]);
                             }catch (ArrayIndexOutOfBoundsException e){
@@ -63,6 +61,11 @@ public class ServerThread implements Runnable{
                     }
                     else {
                         System.out.println("There is no such word. ");
+                        // This bug is wierd
+                        for (int i =0; i< dictionary.meaning(word).length; i++){
+                            if(i==0) printWriter.println("There is no such word.");
+                            else  printWriter.println(" ");
+                        }
                     }
                     break;
             }

@@ -50,6 +50,7 @@ public class DicClient {
             Socket socket = new Socket(host, port);
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println("Client side connection succeed. ");
         } catch (UnknownHostException e){
             e.printStackTrace();
         } catch (IOException e){

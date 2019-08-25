@@ -58,8 +58,6 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                 // Now the input is valid and is not empty.
             }
         });
-
-
     }
 
     @Override
