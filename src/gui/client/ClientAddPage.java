@@ -12,6 +12,7 @@ public class ClientAddPage extends ClientFunctionalPage{
     JTextField jTextFieldMeaning;
     ClientGUI clientGUI;
     JOptionPane jOptionPane;
+    private final int WORD_LIMIT = 256;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
         this.clientGUI = clientGUI;
@@ -29,7 +30,7 @@ public class ClientAddPage extends ClientFunctionalPage{
         add(returnButton);
 
         setVisible(true);
-        update();
+        add();
     }
     @Override
     public void initialiseWindow(){
@@ -47,18 +48,22 @@ public class ClientAddPage extends ClientFunctionalPage{
     public void errorHandling() {
 
     }
-    private void update(){
+    private void add(){
         // Add listener on ButtonOK, to listen if the user end entering.
         buttonOK.addActionListener(new ActionListener() {
+            // If the user has triggered OK Button
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(jTextFieldWord.getText()); // word entered by the user
-                System.out.println(jTextFieldMeaning.getText()); // meaning
+                // Show the second confirm page.
+                // variable yes is whether Yes/No.
                 int yes = addSecondConfirm();
                 try{
                     String word, meaning;
                     word = jTextFieldWord.getText().toLowerCase();
                     meaning = jTextFieldMeaning.getText().toLowerCase();
+//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
+//                    System.out.println(jTextFieldMeaning.getText()); // meaning
+
                     if(word.equals("please enter the word here")|| word.equals("")) {
                         System.out.println("The word you entered is not correct");
                         throw new EmptyInputException();
@@ -71,6 +76,10 @@ public class ClientAddPage extends ClientFunctionalPage{
                     ee.printStackTrace();
                 } catch (Exception ee){
                     ee.printStackTrace();
+                }
+                // The user has confirmed the inputs and the inputs are in correct format.
+                if(yes == JOptionPane.YES_OPTION){
+
                 }
             }
         });
