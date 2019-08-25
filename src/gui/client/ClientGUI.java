@@ -68,7 +68,7 @@ public class ClientGUI {
     }
 
     public void setFucntions(ClientGUI clientGUI) {
-        jFrame = new JFrame("HelloWorld");
+        jFrame = new JFrame("HelloDS");
         jFrame.setSize(400,400);
 //        clientGUI.panelMain.setBounds(0,0,400,400);
         jFrame.setContentPane(clientGUI.panelMain);

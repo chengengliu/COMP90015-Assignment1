@@ -10,6 +10,10 @@ public class Dictionary {
         dictionary = new HashMap<String, String[]>();
         defaultDictionary();
     }
+    public static void main (String args[]){
+        Dictionary dictionary = new Dictionary("Hello");
+
+    }
     // Test if there is a word contained in the dictionary.
     public boolean contain(String word){
         return dictionary.get(word)!=null;
@@ -18,7 +22,7 @@ public class Dictionary {
     // Abaddon (n.) Hell; the bottomless pit.
     // "Abaft (adv.) Toward the stern; aft; as, to go abaft."
     // This parser will be able to separate the word and the defeinition.
-    private static void formatParser(){
+    private static void formatParser(String line){
         String test = "Abaddon (n.) Hell; the bottomless pit.\n";
         String[] tokens = test.split(" ");
         String word = tokens[0];
@@ -31,6 +35,9 @@ public class Dictionary {
         }
      }
     private void defaultDictionary(){
+
+
+
         String word1= "hello";
         String[] meaning1 = {"exclamation: hello; exclamation: hallo; exclamation: hullo"};
         String word2 = "apple";
@@ -39,9 +46,12 @@ public class Dictionary {
         String word3= "great";
         String[] meaning3 = {"adjective\n" +
                 "adjective: great; comparative adjective: greater; superlative adjective: greatest\n"};
-        dictionary.put(word1,meaning1);
-        dictionary.put(word2,meaning2);
-        dictionary.put(word3, meaning3);
+//        System.out.println(meaning1.length);
+
+
+//        dictionary.put(word1,meaning1);
+//        dictionary.put(word2,meaning2);
+//        dictionary.put(word3, meaning3);
     }
     public String[] meaning(String word){
         return dictionary.get(word);

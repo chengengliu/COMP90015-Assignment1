@@ -44,7 +44,7 @@ public class ServerThread implements Runnable{
                 case "Search":
                     if(dictionary.contain(word)){
                         System.out.println("Now Enter the Search part. ");
-                        printWriter.println("HelloWorld");
+//                        printWriter.println("HelloWorld");
                         // Write out meaning from line to line. If the meaning has multiple lines
 
                         for(int i=0; i< dictionary.meaning(word).length; i++){
