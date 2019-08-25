@@ -8,8 +8,10 @@ public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
     JTextField jTextField1;
     JTextField jTextField2;
+    ClientGUI clientGUI;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
+        this.clientGUI = clientGUI;
         label.setText("Please enter the word you want to " +function +": ");
         textArea = new JTextArea("Notice that the first line is the word you want to add, the " +
                 "second line is the meaning you want to add. The word should not exist in the dictionary.  ");
@@ -43,17 +45,22 @@ public class ClientAddPage extends ClientFunctionalPage{
 
     }
     private void update(){
+        String word, meaning;
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(jTextField1.getText());
-            }
-        });
-        buttonOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
                 System.out.println(jTextField2.getText());
+                addSecondConfirm();
             }
         });
+    }
+    @Override
+    public JOptionPane addSecondConfirm(){
+        JOptionPane jOptionPane = new JOptionPane();
+        jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Add the new word and meaning or not? ", "Add",
+                jOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+        add(jOptionPane);
+        return jOptionPane;
     }
 }

@@ -70,6 +70,10 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     public void errorHandling() {
 
     }
+    @Override
+    public JOptionPane addSecondConfirm(){
+        return null;
+    }
 
 
 
