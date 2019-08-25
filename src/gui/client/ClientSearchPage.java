@@ -24,8 +24,8 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
 
         search();
     }
-    @Override
-    public void initialiseWindow(){
+
+    private void initialiseWindow(){
         add(label);
         jTextFieldWord = addTextOnField("Please enter the word here:");
         add(buttonOK);

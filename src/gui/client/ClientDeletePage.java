@@ -24,8 +24,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
         setVisible(true);
         delete();
     }
-    @Override
-    public void initialiseWindow(){
+    private void initialiseWindow(){
         add(label);
         jTextFieldWord = addTextOnField("Please enter the word here:");
         add(buttonOK);

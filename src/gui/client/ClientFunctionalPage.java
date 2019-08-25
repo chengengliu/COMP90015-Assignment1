@@ -23,7 +23,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         setSize(400, 400);
         setDefaultCloseOperation(3);
     }
-    public void initialiseWindow(){
+    private void initialiseWindow(){
         add(label);
         add(textField);
         add(buttonOK);

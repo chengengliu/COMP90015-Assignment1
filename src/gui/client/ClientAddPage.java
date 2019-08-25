@@ -32,8 +32,7 @@ public class ClientAddPage extends ClientFunctionalPage{
         setVisible(true);
         add();
     }
-    @Override
-    public void initialiseWindow(){
+    private void initialiseWindow(){
         add(label);
 //        add(textField); // Enter the word
         jTextFieldWord = addTextOnField("Please enter the word here");  // Enter the word you want to add.
