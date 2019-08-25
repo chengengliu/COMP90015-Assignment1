@@ -13,10 +13,10 @@ public class ServerThread implements Runnable{
     public BufferedReader breader;
     public PrintWriter printWriter;
 
-    public ServerThread(DicServer server, Socket client){
+    public ServerThread(Dictionary dictionary, DicServer server, Socket client){
         this.server = server;
         this.client = client;
-        this.dictionary = null;
+        this.dictionary = dictionary;
         // Later should also pass the dictionary to here.
 
         try {
@@ -30,13 +30,29 @@ public class ServerThread implements Runnable{
     @Override
     public void run() {
         while (true){
+            String flag=null, word=null, meaning=null;
             try{
-                String flag= breader.readLine();
-                String word = breader.readLine();
-                String meaning = breader.readLine();
+                flag= breader.readLine();
+                word = breader.readLine();
+                meaning = breader.readLine();
 
             }catch (IOException e){
                 e.printStackTrace();
+            }
+            switch (flag){
+                case "Search":
+                    if(dictionary.contain(word)){
+                        // Write out meaning from line to line. If the meaning has multiple lines.
+                        for(int i=0; i< DicServer.WORD_ROW; i++){
+                            printWriter.println(dictionary.meaning(word)[i]);
+                            System.out.println("Word looking for meaning is: " + word);
+                            System.out.println("Word meaning is : " + dictionary.meaning(word)[i]);
+                        }
+                    }
+                    else {
+                        System.out.println("There is no such word. ");
+                    }
+                    break;
             }
         }
     }

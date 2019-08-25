@@ -13,6 +13,9 @@ public class DicServer {
     private String address =null;
     private int clientsNumber =0;
     private ServerSocket listening;
+    public static final int WORD_LIMIT = 256;
+    public static final int WORD_ROW = 5;
+    private static Dictionary dictionary;  // Not too sure if it is static or non-static.
 
     public DicServer(){
         startServerGUI();
@@ -23,7 +26,10 @@ public class DicServer {
 
         DicServer dicServer = new DicServer();
         dicServer.validatePortNumber(args);
-        dicServer.validateAddress(args);
+//         For testing purpose, dictionary file will be used as default value now
+//        dicServer.validateAddress(args);
+        dictionary = new Dictionary(args[1]);
+
         dicServer.connect();
     }
 
@@ -80,9 +86,9 @@ public class DicServer {
                 clientsNumber++;
                 System.out.println("Now the server and the client have established the connection. ");
                 // Threading start.
-//                ServerThread serverThread = new ServerThread(this, client);
-//                Thread thread = new Thread(serverThread);
-//                thread.start();
+                ServerThread serverThread = new ServerThread(dictionary,this, client);
+                Thread thread = new Thread(serverThread);
+                thread.start();
 
             } catch (IOException e){
                 e.printStackTrace();

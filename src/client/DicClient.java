@@ -23,7 +23,10 @@ public class DicClient {
 
     public static void main(String args[]){
         DicClient client = new DicClient();
+        // Connect to the server.
         client.connect(args);
+
+        // Start GUI.
         EventQueue.invokeLater(new Runnable(){
             public void run(){
                 try{
@@ -39,7 +42,7 @@ public class DicClient {
     }
     private void connect(String[] args){
         try {
-            String host = args[1];
+            String host = args[0];
             int port = Integer.parseInt(args[1]);
             if(port > 65535 || port <=2014){
                 throw new PortNumberOutOfBounds();

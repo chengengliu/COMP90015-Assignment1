@@ -12,7 +12,7 @@ public class ClientAddPage extends ClientFunctionalPage{
     JTextField jTextFieldMeaning;
     ClientGUI clientGUI;
     JOptionPane jOptionPane;
-    private final int WORD_LIMIT = 256;
+//    private final int WORD_LIMIT = 256;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
         this.clientGUI = clientGUI;
