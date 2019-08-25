@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ClientSearchPage extends ClientFunctionalPage implements  PageFunction{
     JTextArea textArea;
@@ -46,8 +47,16 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     }
                     clientGUI.printWriter.println("Search");
                     clientGUI.printWriter.println(word);
-                    String output = clientGUI.bufferedReader.readLine(); // Later this will be the returning message.
-                    System.out.println(output);
+                    int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
+                    String[] output = new String[length];
+                    for(int i=0; i<length; i++){
+                        output[i] = clientGUI.bufferedReader.readLine();
+                        // Meaning is stored in array
+                        // of list with newline character.
+                    }
+                    String result = stringParser(output);
+                    System.out.println(result);
+
                 }catch (EmptyInputException ee){
                     ee.printStackTrace();
                 }catch (IOException ee){
@@ -58,6 +67,11 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                 // Now the input is valid and is not empty.
             }
         });
+    }
+    private String stringParser(String[] output){
+        String str = Arrays.toString(output);
+        str = str.substring(1,str.length()-1).replace(",","");
+        return  str;
     }
 
     @Override

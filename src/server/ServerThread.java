@@ -40,35 +40,38 @@ public class ServerThread implements Runnable{
             }catch (NullPointerException e){
                 e.printStackTrace();
             }
-            switch (flag){
-                case "Search":
-                    if(dictionary.contain(word)){
-                        System.out.println("Now Enter the Search part. ");
-//                        printWriter.println("HelloWorld");
-                        // Write out meaning from line to line. If the meaning has multiple lines
-
-                        for(int i=0; i< dictionary.meaning(word).length; i++){
-                            try {
-                                printWriter.println(dictionary.meaning(word)[i]);
-                            }catch (ArrayIndexOutOfBoundsException e){
-                                e.printStackTrace();
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-                            System.out.println("Word looking for meaning is: " + word);
-                            System.out.println("Word meaning is : " + dictionary.meaning(word)[i]);
-                        }
-                    }
-                    else {
-                        System.out.println("There is no such word. ");
-                        // This bug is wierd
-                        for (int i =0; i< dictionary.meaning(word).length; i++){
-                            if(i==0) printWriter.println("There is no such word.");
-                            else  printWriter.println(" ");
-                        }
-                    }
-                    break;
+            if(flag == null) {
+                continue;
             }
+            else {
+                switch (flag){
+                    case "Search":
+                        if(dictionary.contain(word)){
+                            System.out.println("Now Enter the Search part. ");
+//                        printWriter.println("HelloWorld");
+                            // Write out meaning from line to line. If the meaning has multiple lines
+
+                            for(int i=0; i< dictionary.meaning(word).length+1; i++){
+                                try {
+                                    if(i==0) printWriter.println(dictionary.meaning((word)).length);
+                                    else printWriter.println(dictionary.meaning(word)[i-1]);
+                                }catch (ArrayIndexOutOfBoundsException e){
+                                    e.printStackTrace();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                                System.out.println("Word looking for meaning is: " + word);
+                                if(i!=0) System.out.println("Word meaning is : " + dictionary.meaning(word)[i-1]);
+                            }
+                        }
+                        else {
+                            // Need to report on client side as well.
+                            System.out.println("There is no such word. ");
+                        }
+                        break;
+                }
+            }
+
         }
     }
 }

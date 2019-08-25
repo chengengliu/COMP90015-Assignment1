@@ -1,5 +1,5 @@
 package gui.client;
-
+//TODO:客户端先关闭时候，应该有个监听来切断socket。
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
