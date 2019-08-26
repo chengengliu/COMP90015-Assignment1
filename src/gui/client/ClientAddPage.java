@@ -88,10 +88,13 @@ public class ClientAddPage extends ClientFunctionalPage{
                         clientGUI.printWriter.println("Add");
                         clientGUI.printWriter.println(word);
                         clientGUI.printWriter.println(meaning);
+                        System.out.println("Meaning sent to the server: "+meaning);
                         // Retrieve any messages from the server and set it to the GUI.
                         String output = clientGUI.bufferedReader.readLine();
                         System.out.println("Add output:"+output);
                     } catch (IOException ee){
+                        ee.printStackTrace();
+                    } catch (Exception ee){
                         ee.printStackTrace();
                     }
                 }

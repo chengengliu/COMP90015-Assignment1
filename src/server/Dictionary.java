@@ -12,23 +12,31 @@ public class Dictionary {
     }
 //    public static void main (String args[]){
 //        Dictionary dictionary = new Dictionary("Hello");
-//
+//        dictionary.test();
 //    }
     public void test(){
-        String test = "asd" ;
-        System.out.println(formatParserForMeaning(test));
+        String word = "asd amd" ;
+        String[] meaning = {"hello"};
+        String[] meaning2 = {"hello2"};
+//        dictionary.put(word, meaning);
+//        dictionary.put(word,meaning2);
+//
+        System.out.println((formatParserForMeaning(word))[0]);
+
+
+
     }
 
 
     // Test if there is a word contained in the dictionary.
     public synchronized boolean contain(String word){
-        return dictionary.get(word)!=null;
+        return (dictionary.get(word))!=null;
     }
     // Sample input is:
     // Abaddon (n.) Hell; the bottomless pit.
     // "Abaft (adv.) Toward the stern; aft; as, to go abaft."
     // This parser will be able to separate the word and the defeinition.
-    private synchronized static String[] formatParserForMeaning(String line){
+    private synchronized  String[] formatParserForMeaning(String line){
         String[] tokens = line.split(" ");
 //        String word = tokens[0];
         String[] meaning = new String[tokens.length-1];
@@ -61,19 +69,6 @@ public class Dictionary {
         String word1 = "hello exclamation: hello; exclamation: hallo; exclamation: hullo";
         String word2 = "apple noun noun: apple; plural noun: apples; noun: apple tree; plural noun: apple trees";
         String word3 = "great adjective adjective: great; comparative adjective: greater; superlative adjective: greatest";
-//        String word1= "hello";
-//        String[] meaning1 = {"exclamation: hello; exclamation: hallo; exclamation: hullo"};
-//        String word2 = "apple";
-//        String[] meaning2 = {"noun\n" +
-//                "noun: apple; plural noun: apples; noun: apple tree; plural noun: apple trees\n"};
-//        String word3= "great";
-//        String[] meaning3 = {"adjective\n" +
-//                "adjective: great; comparative adjective: greater; superlative adjective: greatest\n"};
-//        System.out.println(meaning1.length);
-//        System.out.println(formatParserForMeaning(word1).length);
-//        for(int i=0; i< formatParserForMeaning(word1).length; i++){
-//            System.out.println(formatParserForMeaning(word1)[i]);
-//        }
         dictionary.put(word1.split(" ")[0],formatParserForMeaning(word1));
         dictionary.put(word2.split(" ")[0],formatParserForMeaning(word2));
         dictionary.put(word3.split(" ")[0],formatParserForMeaning(word3));

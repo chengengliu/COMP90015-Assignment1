@@ -30,6 +30,7 @@ public class ServerThread implements Runnable{
     @Override
     public void run() {
         while (true){
+
             String flag=null, word=null, meaning=null;
             try{
                 flag= breader.readLine();
@@ -74,28 +75,22 @@ public class ServerThread implements Runnable{
                         break;
                     case "Add":
                         // If the dictionary doesn't contain the word.
-                        if(!dictionary.contain(word)){
-                            System.out.println("Now enter the process of Add");
-                            try{
-                                meaning = breader.readLine();
-                            } catch (IOException e){
-                                e.printStackTrace();
-                            } catch (NullPointerException e){
-                                e.printStackTrace();
-                            }
-                            // Normally it should work fine, as the meaning is checked on client side to
-                            // avoid empty input. Here is to double check if the function is working as expected.
-                            if(!meaning.isEmpty()){
-                                System.out.println("The word and meaning have been received. Meaning is : "+meaning);
-                                printWriter.println("The dictionary doesn't have the word. The "+word+" will be added. ");
-                                dictionary.add(word,meaning);
-                            }
+                        System.out.println("Enter the stage of adding. ");
+                        try {
+                            meaning = breader.readLine();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        if(dictionary.contain(word)){
+                            printWriter.println("The dictionary already has the word : "+ word);
                         }
                         else {
-                            System.out.println("The word already exists in the dictionary. ");
-                            printWriter.println("The word: "+word+" already exists in the dictionary.");
-                            continue;
+                            printWriter.println("The dictionary doesn't have the word. Updating.");
                         }
+                        dictionary.add(word,meaning);
                         break;
                     case "Delete":
                         break;
