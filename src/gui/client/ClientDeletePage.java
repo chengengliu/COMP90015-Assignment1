@@ -41,6 +41,14 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                     if(word.equals("")||word.equals("please enter the word here:")){
                         throw new EmptyInputException();
                     }
+                    // Send messages to the server
+                    clientGUI.printWriter.println("Delete");
+                    clientGUI.printWriter.println(word); // word to delete
+                    //TODO: Add retrieved message to the server.
+                    // Return message to be added in the GUI later
+                    String output = clientGUI.bufferedReader.readLine();
+                    System.out.println(output);
+
                 }catch (EmptyInputException ee){
                     ee.printStackTrace();
                 }catch (Exception ee){

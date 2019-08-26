@@ -69,6 +69,28 @@ public class ServerThread implements Runnable{
                             System.out.println("There is no such word. ");
                         }
                         break;
+                    case "Add":
+                        // If the dictionary doesn't contain the word.
+                        if(!dictionary.contain(word)){
+                            System.out.println("Now enter the process of Add");
+
+                            try{
+                                meaning = breader.readLine();
+                            } catch (IOException e){
+                                e.printStackTrace();
+                            } catch (NullPointerException e){
+                                e.printStackTrace();
+                            }
+                            // Normally it should work fine, as the meaning is checked on client side to
+                            // avoid empty input. Here is to double check if the function is working as expected.
+                            if(!meaning.isEmpty()){
+                                System.out.println("The word and meaning have been received. Meaning is : "+meaning);
+                                printWriter.println("The dictionary doesn't have the word. The "+word+" will be added. ");
+                                dictionary.add(word,meaning);
+                            }
+                            else continue;
+                        }
+                        else continue;
                 }
             }
 

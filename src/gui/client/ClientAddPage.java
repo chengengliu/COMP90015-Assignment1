@@ -5,6 +5,7 @@ import exceptions.EmptyInputException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
@@ -55,9 +56,10 @@ public class ClientAddPage extends ClientFunctionalPage{
             public void actionPerformed(ActionEvent e) {
                 // Show the second confirm page.
                 // variable yes is whether Yes/No.
+                String word=null, meaning=null;
                 int yes = addSecondConfirm();
                 try{
-                    String word, meaning;
+
                     word = jTextFieldWord.getText().toLowerCase();
                     meaning = jTextFieldMeaning.getText().toLowerCase();
 
@@ -74,6 +76,7 @@ public class ClientAddPage extends ClientFunctionalPage{
                         System.out.println("The meaning you entered is not correct");
                         throw new EmptyInputException();
                     }
+
                 } catch (EmptyInputException ee) {
                     ee.printStackTrace();
                 } catch (Exception ee){
@@ -81,7 +84,16 @@ public class ClientAddPage extends ClientFunctionalPage{
                 }
                 // The user has confirmed the inputs and the inputs are in correct format.
                 if(yes == JOptionPane.YES_OPTION){
-
+                    try{
+                        clientGUI.printWriter.println("Add");
+                        clientGUI.printWriter.println(word);
+                        clientGUI.printWriter.println(meaning);
+                        // Retrieve any messages from the server and set it to the GUI.
+                        String output = clientGUI.bufferedReader.readLine();
+                        System.out.println(output);
+                    } catch (IOException ee){
+                        ee.printStackTrace();
+                    }
                 }
             }
         });

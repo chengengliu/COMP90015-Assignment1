@@ -15,7 +15,7 @@ public class Dictionary {
 //
 //    }
     // Test if there is a word contained in the dictionary.
-    public boolean contain(String word){
+    public synchronized boolean contain(String word){
         return dictionary.get(word)!=null;
     }
     // Sample input is:
@@ -33,6 +33,19 @@ public class Dictionary {
         return meaning;
      }
      // This will be the standard format.
+    public synchronized String[] meaning(String word){
+        return dictionary.get(word);
+    }
+    public synchronized void add(String word, String meaning){
+        dictionary.put(word,formatParserForMeaning(meaning));
+    }
+    public synchronized void delete(String word){
+        dictionary.remove(word);
+    }
+    public HashMap<String, String[]> getDictionary() {
+        return dictionary;
+    }
+
     private void defaultDictionary(){
         String word1 = "hello exclamation: hello; exclamation: hallo; exclamation: hullo";
         String word2 = "apple noun noun: apple; plural noun: apples; noun: apple tree; plural noun: apple trees";
@@ -53,15 +66,6 @@ public class Dictionary {
         dictionary.put(word1.split(" ")[0],formatParserForMeaning(word1));
         dictionary.put(word2.split(" ")[0],formatParserForMeaning(word2));
         dictionary.put(word3.split(" ")[0],formatParserForMeaning(word3));
-    }
-    public String[] meaning(String word){
-
-        return dictionary.get(word);
-    }
-
-
-    public HashMap<String, String[]> getDictionary() {
-        return dictionary;
     }
 
 }
