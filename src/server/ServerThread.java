@@ -65,7 +65,7 @@ public class ServerThread implements Runnable{
                         else {
                             // Need to report on client side as well.
                             System.out.println("There is no such word. ");
-                            printWriter.println();
+                            printWriter.println(0);
                             printWriter.println("There is no such word.!!!! ");
                         }
                         break;

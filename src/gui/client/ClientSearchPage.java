@@ -47,8 +47,6 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     }
                     clientGUI.printWriter.println("Search");
                     clientGUI.printWriter.println(word);
-                    //TODO: 第二次输入没有的单词时候会出现java.lang.NumberFormatException: For input string: "There is no such word. "
-                    // 很明显是server传入有东西被读入了，而且是非数字型字符串，所以无法被parse。
                     int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
                     if(length!=0){
                         String[] output = new String[length];
@@ -62,6 +60,7 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     }
                     else {
                         result = "There is no such word.";
+                        clientGUI.bufferedReader.readLine();
                     }
                     System.out.println("This is the search result:" + result);
 
