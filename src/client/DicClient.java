@@ -18,6 +18,7 @@ public class DicClient {
     private BufferedReader bufferedReader;
     private Socket socket;
     private DicClient(){
+
     }
 
     public static void main(String args[]){
@@ -31,7 +32,7 @@ public class DicClient {
                     ClientGUI clientGUI = new ClientGUI(client.socket,
                             client.bufferedReader,client.printWriter);
                     clientGUI.addListener(clientGUI);
-                    clientGUI.setFucntions(clientGUI); // setVisible and start GUI.
+                    clientGUI.initialiseGUI(clientGUI); // setVisible and start GUI.
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -48,6 +49,7 @@ public class DicClient {
             }
             if(args.length !=2) throw new ArrayIndexOutOfBoundsException();
             Socket socket = new Socket(host, port);
+            // Establish string writer and reader associated with the socket.
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Client side connection succeed. ");

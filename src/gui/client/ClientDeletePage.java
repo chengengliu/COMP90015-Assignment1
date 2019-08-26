@@ -68,7 +68,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();
-        int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Add the new word and meaning or not? ", "Add",
+        int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Are you sure to delete the word? ", "Add",
                 jOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         add(jOptionPane);
         return yes;

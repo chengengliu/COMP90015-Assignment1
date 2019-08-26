@@ -45,35 +45,40 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     if(word.equals("")|| word.equals("please enter the word here")){
                         throw new EmptyInputException();
                     }
-                    clientGUI.printWriter.println("Search");
-                    clientGUI.printWriter.println(word);
-                    int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
-                    if(length!=0){
-                        String[] output = new String[length];
-                        for(int i=0; i<length; i++){
-                            output[i] = clientGUI.bufferedReader.readLine();
-                            // Meaning is stored in array
-                            // of list with newline character.
-                            System.out.println(output[i]);
-                        }
-                        result = stringParser(output);
-                    }
-                    else {
-                        result = "There is no such word.";
-                        clientGUI.bufferedReader.readLine();
-                    }
-                    System.out.println("This is the search result:" + result);
-
                 }catch (NumberFormatException ee){
                     ee.printStackTrace();
                 }catch (EmptyInputException ee){
-                    ee.printStackTrace();
-                }catch (IOException ee){
                     ee.printStackTrace();
                 }catch (Exception ee){
                     ee.printStackTrace();
                 }
                 // Now the input is valid and is not empty.
+                if(yes == JOptionPane.YES_OPTION){
+                    try{
+                        clientGUI.printWriter.println("Search");
+                        clientGUI.printWriter.println(word);
+                        int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
+                        if(length!=0){
+                            String[] output = new String[length];
+                            for(int i=0; i<length; i++){
+                                output[i] = clientGUI.bufferedReader.readLine();
+                                // Meaning is stored in array
+                                // of list with newline character.
+                                System.out.println(output[i]);
+                            }
+                            result = stringParser(output);
+                        }
+                        else {
+                            result = "There is no such word.";
+                            clientGUI.bufferedReader.readLine();
+                        }
+                        System.out.println("This is the search result:" + result);
+                    }catch (IOException ee){
+                        ee.printStackTrace();
+                    }catch (Exception ee){
+                        ee.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -86,7 +91,7 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();
-        int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Add the new word and meaning or not? ", "Add",
+        int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Confirm search the word? ", "Add",
                 jOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         add(jOptionPane);
         return  yes;

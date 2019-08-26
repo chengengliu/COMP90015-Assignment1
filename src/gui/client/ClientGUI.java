@@ -70,7 +70,7 @@ public class ClientGUI {
         }
     }
 
-    public void setFucntions(ClientGUI clientGUI) {
+    public void initialiseGUI(ClientGUI clientGUI) {
         jFrame = new JFrame("HelloDS");
         jFrame.setSize(400,400);
 //        clientGUI.panelMain.setBounds(0,0,400,400);
