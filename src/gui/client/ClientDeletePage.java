@@ -7,6 +7,7 @@ import exceptions.EmptyInputException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ClientDeletePage extends  ClientFunctionalPage {
     JOptionPane jOptionPane;
@@ -33,26 +34,33 @@ public class ClientDeletePage extends  ClientFunctionalPage {
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String word = null;
                 int yes = addSecondConfirm();
                 try{
-                    String word;
                     word = jTextFieldWord.getText().trim().toLowerCase();
-                    System.out.println(word);
+//                    System.out.println(word);
                     if(word.equals("")||word.equals("please enter the word here:")){
                         throw new EmptyInputException();
                     }
                     // Send messages to the server
-                    clientGUI.printWriter.println("Delete");
-                    clientGUI.printWriter.println(word); // word to delete
-                    //TODO: Add retrieved message to the server.
-                    // Return message to be added in the GUI later
-                    String output = clientGUI.bufferedReader.readLine();
-                    System.out.println(output);
 
                 }catch (EmptyInputException ee){
                     ee.printStackTrace();
                 }catch (Exception ee){
                     ee.printStackTrace();
+                }
+                if(yes==JOptionPane.YES_OPTION){
+                    try{
+                        clientGUI.printWriter.println("Delete");
+                        clientGUI.printWriter.println(word); // word to delete
+                        // Return message to be added in the GUI later
+                        String output = clientGUI.bufferedReader.readLine();
+                        System.out.println(output);
+                    }catch (IOException ee){
+                        ee.printStackTrace();
+                    }catch (Exception ee){
+                        ee.printStackTrace();
+                    }
                 }
             }
         });

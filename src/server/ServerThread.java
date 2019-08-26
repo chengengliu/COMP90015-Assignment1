@@ -49,9 +49,6 @@ public class ServerThread implements Runnable{
                     case "Search":
                         if(dictionary.contain(word)){
                             System.out.println("Now Enter the Search part. ");
-//                        printWriter.println("HelloWorld");
-                            // Write out meaning from line to line. If the meaning has multiple lines
-
                             for(int i=0; i< dictionary.meaning(word).length+1; i++){
                                 try {
                                     if(i==0) printWriter.println(dictionary.meaning((word)).length);
@@ -68,9 +65,8 @@ public class ServerThread implements Runnable{
                         else {
                             // Need to report on client side as well.
                             System.out.println("There is no such word. ");
-                            printWriter.println("0");
-                            printWriter.println("There is no such word. ");
-                            continue;
+                            printWriter.println();
+                            printWriter.println("There is no such word.!!!! ");
                         }
                         break;
                     case "Add":
@@ -93,6 +89,13 @@ public class ServerThread implements Runnable{
                         dictionary.add(word,meaning);
                         break;
                     case "Delete":
+                        if(dictionary.contain(word)){
+                            printWriter.println("Delete the word :" + word);
+                            dictionary.delete(word);
+                        }
+                        else {
+                            printWriter.println("The word doesn't exist. Error!");
+                        }
                         break;
                     case "Shutdown":
                         server.disconnect();

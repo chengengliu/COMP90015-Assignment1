@@ -37,9 +37,9 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String word =null, result =null;
                 int yes = addSecondConfirm();
                 try{
-                    String word, result=null;
                     word = jTextFieldWord.getText().trim().toLowerCase();
 //                    System.out.println(word);
                     if(word.equals("")|| word.equals("please enter the word here")){
@@ -47,6 +47,8 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     }
                     clientGUI.printWriter.println("Search");
                     clientGUI.printWriter.println(word);
+                    //TODO: 第二次输入没有的单词时候会出现java.lang.NumberFormatException: For input string: "There is no such word. "
+                    // 很明显是server传入有东西被读入了，而且是非数字型字符串，所以无法被parse。
                     int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
                     if(length!=0){
                         String[] output = new String[length];
