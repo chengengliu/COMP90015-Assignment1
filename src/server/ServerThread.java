@@ -86,7 +86,11 @@ public class ServerThread implements Runnable{
                         else {
                             printWriter.println("The dictionary doesn't have the word. Updating.");
                         }
-                        dictionary.add(word,meaning);
+                        dictionary.add(word,meaning,"input");
+                        for(int i=0; i<dictionary.meaning(word).length; i++){
+                            System.out.println("To make sure the meaning is updated correctly: "+dictionary.meaning(word)[i]);
+                        }
+                        System.out.println(meaning);
                         break;
                     case "Delete":
                         if(dictionary.contain(word)){

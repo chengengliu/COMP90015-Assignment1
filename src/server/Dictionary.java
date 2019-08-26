@@ -15,16 +15,15 @@ public class Dictionary {
 //        dictionary.test();
 //    }
     public void test(){
-        String word = "asd amd" ;
+        String word = "hello world haha" ;
         String[] meaning = {"hello"};
         String[] meaning2 = {"hello2"};
+        System.out.println(word.split(" ").length);
 //        dictionary.put(word, meaning);
 //        dictionary.put(word,meaning2);
 //
-        System.out.println((formatParserForMeaning(word))[0]);
-
-
-
+//        System.out.println((formatParserForMeaning(word))[0]);
+        System.out.println(formatParserForInput(word)[2]);
     }
 
 
@@ -49,14 +48,33 @@ public class Dictionary {
             return output;
         }
         return meaning;
-
+    }
+    private synchronized String[] formatParserForInput(String input){
+        String[] tokens = input.split(" ");
+        String[] meaning = new String[tokens.length];
+        for(int i=0; i<tokens.length; i++){
+            meaning[i] = tokens[i];
+        }
+        if(meaning == null || tokens.length==1){
+            String[] output= new String[1];
+            output[0] = input;
+            return output;
+        }
+        return meaning;
     }
      // This will be the standard format.
     public synchronized String[] meaning(String word){
         return dictionary.get(word);
     }
-    public synchronized void add(String word, String meaning){
-        dictionary.put(word,formatParserForMeaning(meaning));
+    public synchronized void add(String word, String meaning,String flag){
+//        dictionary.put(word,formatParserForMeaning(meaning));
+        switch (flag){
+            case "input":
+                dictionary.put(word,formatParserForInput(meaning));
+                break;
+            case "meaning":
+                dictionary.put(word,formatParserForMeaning(meaning));
+        }
     }
     public synchronized void delete(String word){
         dictionary.remove(word);
