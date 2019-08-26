@@ -67,13 +67,15 @@ public class ServerThread implements Runnable{
                         else {
                             // Need to report on client side as well.
                             System.out.println("There is no such word. ");
+                            printWriter.println("0");
+                            printWriter.println("There is no such word. ");
+                            continue;
                         }
                         break;
                     case "Add":
                         // If the dictionary doesn't contain the word.
                         if(!dictionary.contain(word)){
                             System.out.println("Now enter the process of Add");
-
                             try{
                                 meaning = breader.readLine();
                             } catch (IOException e){
@@ -88,9 +90,26 @@ public class ServerThread implements Runnable{
                                 printWriter.println("The dictionary doesn't have the word. The "+word+" will be added. ");
                                 dictionary.add(word,meaning);
                             }
-                            else continue;
                         }
-                        else continue;
+                        else {
+                            System.out.println("The word already exists in the dictionary. ");
+                            printWriter.println("The word: "+word+" already exists in the dictionary.");
+                            continue;
+                        }
+                        break;
+                    case "Delete":
+                        break;
+                    case "Shutdown":
+                        server.disconnect();
+                        printWriter.close();
+                        try {
+                            breader.close();
+                            client.close();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+                        Thread.currentThread().interrupt();
+                        return;
                 }
             }
 

@@ -36,7 +36,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                 int yes = addSecondConfirm();
                 try{
                     String word;
-                    word = jTextFieldWord.getText().toLowerCase();
+                    word = jTextFieldWord.getText().trim().toLowerCase();
                     System.out.println(word);
                     if(word.equals("")||word.equals("please enter the word here:")){
                         throw new EmptyInputException();

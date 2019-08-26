@@ -60,13 +60,13 @@ public class ClientAddPage extends ClientFunctionalPage{
                 int yes = addSecondConfirm();
                 try{
 
-                    word = jTextFieldWord.getText().toLowerCase();
+                    word = jTextFieldWord.getText().trim().toLowerCase();
                     meaning = jTextFieldMeaning.getText().toLowerCase();
 
                     // What if the user enter?????
                     // After testing it seems all good. Enter will not effect the String.
-                    System.out.println(jTextFieldWord.getText()); // word entered by the user
-                    System.out.println(jTextFieldMeaning.getText()); // meaning
+//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
+//                    System.out.println(jTextFieldMeaning.getText()); // meaning
 
                     if(word.equals("please enter the word here")|| word.equals("")) {
                         System.out.println("The word you entered is not correct");
@@ -90,7 +90,7 @@ public class ClientAddPage extends ClientFunctionalPage{
                         clientGUI.printWriter.println(meaning);
                         // Retrieve any messages from the server and set it to the GUI.
                         String output = clientGUI.bufferedReader.readLine();
-                        System.out.println(output);
+                        System.out.println("Add output:"+output);
                     } catch (IOException ee){
                         ee.printStackTrace();
                     }

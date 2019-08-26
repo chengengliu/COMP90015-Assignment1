@@ -3,7 +3,10 @@ package gui.client;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
@@ -74,6 +77,21 @@ public class ClientGUI {
         jFrame.setContentPane(clientGUI.panelMain);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jFrame.pack(); // Set up everything floating to the size.
+
+        jFrame.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printWriter.write("Shutdown");
+                printWriter.close();
+                try {
+                    bufferedReader.close();
+                    socket.close();
+                } catch (IOException ee){
+                    ee.printStackTrace();
+                }
+                System.exit(0);
+            }
+        });
         jFrame.setVisible(true);
     }
 

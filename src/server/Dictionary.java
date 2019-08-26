@@ -14,6 +14,12 @@ public class Dictionary {
 //        Dictionary dictionary = new Dictionary("Hello");
 //
 //    }
+    public void test(){
+        String test = "asd" ;
+        System.out.println(formatParserForMeaning(test));
+    }
+
+
     // Test if there is a word contained in the dictionary.
     public synchronized boolean contain(String word){
         return dictionary.get(word)!=null;
@@ -22,16 +28,21 @@ public class Dictionary {
     // Abaddon (n.) Hell; the bottomless pit.
     // "Abaft (adv.) Toward the stern; aft; as, to go abaft."
     // This parser will be able to separate the word and the defeinition.
-    private static String[] formatParserForMeaning(String line){
+    private synchronized static String[] formatParserForMeaning(String line){
         String[] tokens = line.split(" ");
 //        String word = tokens[0];
         String[] meaning = new String[tokens.length-1];
         for(int i=0; i < tokens.length-1; i++){
             meaning[i] = tokens[i+1];
         }
-        String test = null;
+        if(meaning == null || tokens.length==1){
+            String[] output= new String[1];
+            output[0] = line;
+            return output;
+        }
         return meaning;
-     }
+
+    }
      // This will be the standard format.
     public synchronized String[] meaning(String word){
         return dictionary.get(word);

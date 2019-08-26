@@ -39,8 +39,8 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
             public void actionPerformed(ActionEvent e) {
                 int yes = addSecondConfirm();
                 try{
-                    String word;
-                    word = jTextFieldWord.getText().toLowerCase();
+                    String word, result=null;
+                    word = jTextFieldWord.getText().trim().toLowerCase();
 //                    System.out.println(word);
                     if(word.equals("")|| word.equals("please enter the word here")){
                         throw new EmptyInputException();
@@ -48,15 +48,23 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                     clientGUI.printWriter.println("Search");
                     clientGUI.printWriter.println(word);
                     int length = Integer.parseInt(clientGUI.bufferedReader.readLine()); // Later this will be the returning message.
-                    String[] output = new String[length];
-                    for(int i=0; i<length; i++){
-                        output[i] = clientGUI.bufferedReader.readLine();
-                        // Meaning is stored in array
-                        // of list with newline character.
+                    if(length!=0){
+                        String[] output = new String[length];
+                        for(int i=0; i<length; i++){
+                            output[i] = clientGUI.bufferedReader.readLine();
+                            // Meaning is stored in array
+                            // of list with newline character.
+                            System.out.println(output[i]);
+                        }
+                        result = stringParser(output);
                     }
-                    String result = stringParser(output);
-                    System.out.println(result);
+                    else {
+                        result = "There is no such word.";
+                    }
+                    System.out.println("This is the search result:" + result);
 
+                }catch (NumberFormatException ee){
+                    ee.printStackTrace();
                 }catch (EmptyInputException ee){
                     ee.printStackTrace();
                 }catch (IOException ee){
