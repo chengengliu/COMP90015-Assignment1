@@ -24,7 +24,7 @@ public class DicClient {
     public static void main(String args[]){
         DicClient client = new DicClient();
         // Connect to the server.
-//        client.connect(args);
+        client.connect(args);
         // Start GUI.
         EventQueue.invokeLater(new Runnable(){
             public void run(){
@@ -48,7 +48,7 @@ public class DicClient {
                 throw new PortNumberOutOfBounds();
             }
             if(args.length !=2) throw new ArrayIndexOutOfBoundsException();
-            Socket socket = new Socket(host, port);
+            socket = new Socket(host, port);
             // Establish string writer and reader associated with the socket.
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

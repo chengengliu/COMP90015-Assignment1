@@ -81,23 +81,30 @@ public class ClientGUI {
         jFrame.setSize(600,600);
 //        clientGUI.panelMain.setBounds(0,0,400,400);
         jFrame.setContentPane(clientGUI.panelMain);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jFrame.pack(); // Set up everything floating to the size.
-
-        jFrame.addWindowFocusListener(new WindowAdapter() {
+        JOptionPane jOptionPane = new JOptionPane();
+        WindowAdapter adapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                printWriter.write("Shutdown");
-                printWriter.close();
-                try {
-                    bufferedReader.close();
-                    socket.close();
-                } catch (IOException ee){
-                    ee.printStackTrace();
+                System.out.println("Hello");
+                int yes = jOptionPane.showConfirmDialog(jFrame,"Sure you want to exit?","Exit",
+                        jOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(yes==JOptionPane.YES_OPTION){
+                    printWriter.write("Shutdown");
+                    printWriter.close();
+                    try {
+                        bufferedReader.close();
+                        socket.close();
+                    } catch (IOException ee){
+                        ee.printStackTrace();
+                    }
+                    System.exit(0);
                 }
-                System.exit(0);
+//
             }
-        });
+        };
+        jFrame.addWindowListener(adapter);
         loadIcon();
         jFrame.setVisible(true);
     }
