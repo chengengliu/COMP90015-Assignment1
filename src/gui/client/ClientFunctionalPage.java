@@ -2,10 +2,7 @@ package gui.client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 
 public class ClientFunctionalPage extends JFrame implements PageFunction{
     JLabel label;
@@ -36,9 +33,11 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
             @Override
             public void actionPerformed(ActionEvent e) {
                 clientGUI.getjFrame().toFront();
+                ClientFunctionalPage.super.dispose();
             }
         });
         returnButton.setBounds(new Rectangle(3,3,250,250));
+
     }
 
     @Override

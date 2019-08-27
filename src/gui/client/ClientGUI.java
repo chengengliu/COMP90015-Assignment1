@@ -81,6 +81,7 @@ public class ClientGUI {
         jFrame.setSize(600,600);
 //        clientGUI.panelMain.setBounds(0,0,400,400);
         jFrame.setContentPane(clientGUI.panelMain);
+        // Default close.
 //        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jFrame.pack(); // Set up everything floating to the size.
         JOptionPane jOptionPane = new JOptionPane();
