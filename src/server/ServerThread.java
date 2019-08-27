@@ -81,12 +81,12 @@ public class ServerThread implements Runnable{
                         }
 
                         if(dictionary.contain(word)){
-                            printWriter.println("The dictionary already has the word : "+ word);
+                            printWriter.println("The dictionary already has the word : "+ word+" .This is duplication");
                         }
                         else {
                             printWriter.println("The dictionary doesn't have the word. Updating.");
+                            dictionary.add(word,meaning,"input");
                         }
-                        dictionary.add(word,meaning,"input");
                         for(int i=0; i<dictionary.meaning(word).length; i++){
                             System.out.println("To make sure the meaning is updated correctly: "+dictionary.meaning(word)[i]);
                         }
