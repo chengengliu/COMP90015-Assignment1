@@ -28,6 +28,7 @@ public class ClientAddPage extends ClientFunctionalPage{
         initialiseWindow();
 
         super.addReturnButton(clientGUI);
+        super.loadIcon();
         add(returnButton);
 
         setVisible(true);

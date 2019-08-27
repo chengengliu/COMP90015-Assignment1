@@ -18,8 +18,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         setLayout(new FlowLayout());
         label = new JLabel();
         textField = new JTextField(20);
-        buttonOK = new JButton("OK");
-//        labelResult = new JLabel("Result");
+        buttonOK = new JButton();
         setSize(400, 400);
         setDefaultCloseOperation(3);
     }
@@ -32,13 +31,14 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
 
     @Override
     public void addReturnButton(ClientGUI clientGUI) {
-        returnButton = new JButton("Return");
+        returnButton = new JButton();
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clientGUI.getjFrame().toFront();
             }
         });
+        returnButton.setBounds(new Rectangle(3,3,250,250));
     }
 
     @Override
@@ -59,6 +59,13 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         });
         add(meaning);
         return meaning;
+    }
+    public void loadIcon(){
+        Image returnImage = new ImageIcon(this.getClass().getResource("/resources/return.png")).getImage();
+        returnButton.setIcon(new ImageIcon(returnImage));
+        Image okImage = new ImageIcon(this.getClass().getResource("/resources/checked.png")).getImage();
+        buttonOK.setIcon(new ImageIcon(okImage));
+
     }
 
     public Font setFont(){

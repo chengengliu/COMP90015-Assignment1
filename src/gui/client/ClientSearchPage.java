@@ -21,6 +21,7 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
 
         super.addReturnButton(clientGUI);
         add(returnButton);
+        super.loadIcon();
 
         setVisible(true);
 

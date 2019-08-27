@@ -21,6 +21,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
 
         super.addReturnButton(clientGUI);
         add(returnButton);
+        super.loadIcon();
 
         setVisible(true);
         delete();
