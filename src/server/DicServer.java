@@ -32,7 +32,7 @@ public class DicServer {
 
         dicServer.validatePortNumber(args);
         dictionary = new Dictionary(args[1]);
-        dicServer.connect();
+//        dicServer.connect();
 
         //Test for Server GUI now.
 
