@@ -3,6 +3,7 @@ package gui.client;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class ClientFunctionalPage extends JFrame implements PageFunction{
     JLabel label;
@@ -10,6 +11,8 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     JButton buttonOK;
     JLabel labelResult;
     JButton returnButton;
+    WindowAdapter adapter;
+    JOptionPane jOptionPane;
 
     public ClientFunctionalPage(ClientGUI clientGUI){
         setLayout(new FlowLayout());
@@ -17,12 +20,40 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         textField = new JTextField(20);
         buttonOK = new JButton();
         setSize(400, 400);
-        setDefaultCloseOperation(3);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        jOptionPane = new JOptionPane();
+        adapter = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Hello");
+                int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(),"Sure you want to exit?","Exit",
+                        jOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(yes==JOptionPane.YES_OPTION){
+                    clientGUI.printWriter.write("Shutdown");
+                    clientGUI.printWriter.close();
+                    System.out.println("Exit");
+                    try {
+                        clientGUI.bufferedReader.close();
+                        clientGUI.socket.close();
+                    } catch (IOException ee){
+                        ee.printStackTrace();
+                    }
+                    System.exit(0);
+                }
+                else {
+                    System.out.println("Stay awake");
+                }
+//
+            }
+        };
+        this.addWindowListener(adapter);
+
     }
     private void initialiseWindow(){
         add(label);
         add(textField);
         add(buttonOK);
+
 //        add(labelResult);
     }
 

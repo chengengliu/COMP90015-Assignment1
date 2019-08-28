@@ -81,6 +81,7 @@ public class ClientGUI {
         jFrame.setSize(600,600);
 //        clientGUI.panelMain.setBounds(0,0,400,400);
         jFrame.setContentPane(clientGUI.panelMain);
+        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         // Default close.
 //        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jFrame.pack(); // Set up everything floating to the size.
@@ -97,6 +98,7 @@ public class ClientGUI {
                 if(yes==JOptionPane.YES_OPTION){
                     printWriter.write("Shutdown");
                     printWriter.close();
+                    System.out.println("Shutting down.");
                     try {
                         bufferedReader.close();
                         socket.close();
@@ -107,13 +109,11 @@ public class ClientGUI {
                 }
                 else {
                     System.out.println("Stay awake");
-                    jFrame.toFront();
+                    jFrame.setVisible(true);
                 }
-//
             }
         };
         jFrame.addWindowListener(adapter);
-        jFrame.toFront();
         loadIcon();
         jFrame.setVisible(true);
     }
