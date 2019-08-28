@@ -1,6 +1,6 @@
 package gui.client;
-//TODO: 1. Client GUI还需要美化和修改。 比如： 窗口大小调整，加上图片。
-//TODO: 2. Client GUI 之间的联动也有问题， 应该是打开一个，之前的关闭，return 会关闭当前窗口，打开之前的窗口。
+//TODO: 1. Client GUI还需要美化和修改。 比如： 窗口大小调整，加上图片。已完成。
+//TODO: 2. Client GUI 之间的联动也有问题， 应该是打开一个，之前的关闭，return 会关闭当前窗口，打开之前的窗口。已完成。
 //TODO: 3. Server Side GUI
 
 // Images credit: Icon made by Google (https://www.flaticon.com/authors/google) from www.flaticon.com
@@ -28,7 +28,7 @@ public class ClientGUI {
     private HashMap<String, JButton> buttons;
 
     public BufferedReader bufferedReader;
-    private Socket socket;
+    public Socket socket;
     public PrintWriter printWriter;
 
     public ClientGUI(Socket socket, BufferedReader bufferedReader, PrintWriter printWriter) {
@@ -85,6 +85,9 @@ public class ClientGUI {
 //        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jFrame.pack(); // Set up everything floating to the size.
         JOptionPane jOptionPane = new JOptionPane();
+
+        // Safely shutdown the connection between the client and the server,
+        // if the client side is shutdown.
         WindowAdapter adapter = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -102,10 +105,15 @@ public class ClientGUI {
                     }
                     System.exit(0);
                 }
+                else {
+                    System.out.println("Stay awake");
+                    jFrame.toFront();
+                }
 //
             }
         };
         jFrame.addWindowListener(adapter);
+        jFrame.toFront();
         loadIcon();
         jFrame.setVisible(true);
     }

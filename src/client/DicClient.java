@@ -18,7 +18,6 @@ public class DicClient {
     private BufferedReader bufferedReader;
     private Socket socket;
     private DicClient(){
-
     }
 
     public static void main(String args[]){

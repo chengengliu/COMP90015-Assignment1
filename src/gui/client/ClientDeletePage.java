@@ -56,6 +56,8 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                         clientGUI.printWriter.println(word); // word to delete
                         // Return message to be added in the GUI later
                         String output = clientGUI.bufferedReader.readLine();
+//                        showResponse(output);
+                        ResponsePage responsePage = new ResponsePage(output);
                         System.out.println(output);
                     }catch (IOException ee){
                         ee.printStackTrace();
@@ -66,12 +68,19 @@ public class ClientDeletePage extends  ClientFunctionalPage {
             }
         });
     }
+
+    // Show the response from the server on GUI.
+    private void showResponse(String response){
+        JTextArea jTextArea = new JTextArea(response);
+        jTextArea.setBounds(400,400,200,20);
+        add(jTextArea);
+    }
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();
         int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(), "Are you sure to delete the word? ", "Add",
                 jOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        add(jOptionPane);
+//        add(jOptionPane);
         return yes;
     }
 }

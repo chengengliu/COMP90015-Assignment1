@@ -33,7 +33,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
             @Override
             public void actionPerformed(ActionEvent e) {
                 clientGUI.getjFrame().toFront();
-                ClientFunctionalPage.super.dispose();
+                ClientFunctionalPage.super.dispose(); // Close the current window and return back to main page.
             }
         });
         returnButton.setBounds(new Rectangle(3,3,250,250));
@@ -82,7 +82,4 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     public int addSecondConfirm(){
         return 0;
     }
-
-
-
 }

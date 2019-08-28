@@ -102,7 +102,7 @@ public class ServerThread implements Runnable{
                         }
                         break;
                     case "Shutdown":
-                        server.disconnect();
+                        server.clientDisconnect();
                         printWriter.close();
                         try {
                             breader.close();

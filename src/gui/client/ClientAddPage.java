@@ -5,6 +5,8 @@ import exceptions.EmptyInputException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class ClientAddPage extends ClientFunctionalPage{
@@ -13,6 +15,7 @@ public class ClientAddPage extends ClientFunctionalPage{
     JTextField jTextFieldMeaning;
     ClientGUI clientGUI;
     JOptionPane jOptionPane;
+    WindowAdapter adapter;
 //    private final int WORD_LIMIT = 256;
     public ClientAddPage(String function, ClientGUI clientGUI){
         super(clientGUI);
@@ -32,6 +35,34 @@ public class ClientAddPage extends ClientFunctionalPage{
         add(returnButton);
 
         setVisible(true);
+        // Safely shutdown the connection between the client and the server,
+        // if the client side is shutdown.
+        adapter = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Hello");
+                int yes = jOptionPane.showConfirmDialog(clientGUI.getjFrame(),"Sure you want to exit?","Exit",
+                        jOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(yes==JOptionPane.YES_OPTION){
+                    clientGUI.printWriter.write("Shutdown");
+                    clientGUI.printWriter.close();
+                    System.out.println("Exit");
+                    try {
+                        clientGUI.bufferedReader.close();
+                        clientGUI.socket.close();
+                    } catch (IOException ee){
+                        ee.printStackTrace();
+                    }
+                    System.exit(0);
+                }
+                else {
+                    System.out.println("Stay awake");
+                }
+//
+            }
+        };
+        this.addWindowListener(adapter);
+
         add();
     }
     private void initialiseWindow(){
@@ -101,6 +132,10 @@ public class ClientAddPage extends ClientFunctionalPage{
                 }
             }
         });
+
+        JOptionPane jOptionPane = new JOptionPane();
+
+
     }
     @Override
     public int addSecondConfirm(){

@@ -16,21 +16,35 @@ public class DicServer {
     public static final int WORD_LIMIT = 256;
     public static final int WORD_ROW = 5;
     private static Dictionary dictionary;  // Not too sure if it is static or non-static.
+    public ServerGUI serverGUI;
 
     public DicServer(){
-        startServerGUI();
+
     }
 
 
     public static void main (String args[]){
 
+
         DicServer dicServer = new DicServer();
+        dicServer.serverGUI = new ServerGUI(dicServer);
+        dicServer.serverGUI.getFrame().setVisible(true);
+
         dicServer.validatePortNumber(args);
+        dictionary = new Dictionary(args[1]);
+        dicServer.connect();
+
+        //Test for Server GUI now.
+
+
+//        dicServer.validatePortNumber(args);
+
+
 //         For testing purpose, dictionary file will be used as default value now
 //        dicServer.validateAddress(args);
-        dictionary = new Dictionary(args[1]);
 
-        dicServer.connect();
+
+
     }
 
 
@@ -98,8 +112,23 @@ public class DicServer {
         }
     }
 
-    public void disconnect(){
+    public void clientDisconnect(){
         clientsNumber--;
+    }
+    public void serverShutdown(){
+        try {
+            if(clientsNumber == 0){
+                listening.close();
+                System.exit(0);
+            }
+            else {
+                serverGUI.serverStatus.append("\nThere are clients online");
+                serverGUI.serverStatus.append("\n"+clientsNumber+"still want to connect");
+                serverGUI.serverStatus.append("\nPlease shutdwon later");
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private static void defaultHostHandle(){
