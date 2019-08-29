@@ -26,8 +26,10 @@
           </grid>
         </constraints>
         <properties>
-          <font size="20" style="1"/>
+          <font size="8" style="1"/>
+          <lineWrap value="true"/>
           <text value="Content:"/>
+          <wrapStyleWord value="false"/>
         </properties>
       </component>
       <component id="ddaba" class="javax.swing.JButton" binding="buttonReturn">

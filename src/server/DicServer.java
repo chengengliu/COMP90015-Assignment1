@@ -37,20 +37,11 @@ public class DicServer {
 
 
         dicServer.validatePortNumber(args);
+        System.out.println(args[1]);
+        dicServer.validateAddress(args);
         dictionary = new Dictionary(args[1]);
+
         dicServer.connect();
-
-        //Test for Server GUI now.
-
-
-//        dicServer.validatePortNumber(args);
-
-
-//         For testing purpose, dictionary file will be used as default value now
-//        dicServer.validateAddress(args);
-
-
-
     }
 
 

@@ -48,6 +48,8 @@ public class ClientAddPage extends ClientFunctionalPage{
         add(buttonOK);
         add(textArea);
         response = new JTextArea("This is the reponse message: \n");
+        response.setLineWrap(true);
+        response.setWrapStyleWord(true);
         add(response);
     }
 

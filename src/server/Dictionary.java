@@ -1,5 +1,6 @@
 package server;
 
+import java.io.*;
 import java.util.HashMap;
 
 public class Dictionary {
@@ -8,24 +9,27 @@ public class Dictionary {
     public Dictionary(String path){
         // For now let's use an empty dictionary for test use.
         dictionary = new HashMap<String, String[]>();
-        defaultDictionary();
-    }
-//    public static void main (String args[]){
-//        Dictionary dictionary = new Dictionary("Hello");
-//        dictionary.test();
-//    }
-    public void test(){
-        String word = "hello world haha" ;
-        String[] meaning = {"hello"};
-        String[] meaning2 = {"hello2"};
-        System.out.println(word.split(" ").length);
-//        dictionary.put(word, meaning);
-//        dictionary.put(word,meaning2);
-//
-//        System.out.println((formatParserForMeaning(word))[0]);
-        System.out.println(formatParserForInput(word)[2]);
-    }
+//        defaultDictionary();
+        loadDictionary(path);
 
+    }
+    public void loadDictionary(String path){
+        try{
+            File file = new File(path);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line= null;
+            while((line=reader.readLine())!=null){
+                dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.out.println("No such file! Use default dictionary!");
+            defaultDictionary();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+//        test();
+    }
 
     // Test if there is a word contained in the dictionary.
     public synchronized boolean contain(String word){
@@ -83,7 +87,7 @@ public class Dictionary {
         return dictionary;
     }
 
-    private void defaultDictionary(){
+    public void defaultDictionary(){
         String word1 = "hello exclamation: hello; exclamation: hallo; exclamation: hullo";
         String word2 = "apple noun noun: apple; plural noun: apples; noun: apple tree; plural noun: apple trees";
         String word3 = "great adjective adjective: great; comparative adjective: greater; superlative adjective: greatest";
