@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
 
 public class ServerThread implements Runnable{
     private Dictionary dictionary;
@@ -86,14 +87,25 @@ public class ServerThread implements Runnable{
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-
+                        // If the word is already in the dictionary, test if the meaning is the same as previous one.
+                        // If the same, show warning. If not, show success.
                         if(dictionary.contain(word)){
-                            printWriter.println("The dictionary already has the word : "+ word+" .This is duplication");
-                            server.serverGUI.updateIpAndPort(this.order);
-                            server.serverGUI.updateClientStatus("Client Add word: "+word+" : "+"Unsuccessfully due to duplication");
+                            if(assertMeaningEquals(word,meaning)){
+                                printWriter.println("The dictionary already has the word : "+ word+" and meaning. This is duplication");
+                                server.serverGUI.updateIpAndPort(this.order);
+                                server.serverGUI.updateClientStatus("Client Add word: "+word+" : "+"Unsuccessfully due to duplication");
+                            }
+                            else{
+                                printWriter.println("The dictionary has the word:" + word+" but with a different meaning. Update the meaning...");
+                                // Replace the old meaning with new meaning.
+                                dictionary.delete(word);
+                                dictionary.add(word,meaning,"input");
+                                server.serverGUI.updateIpAndPort(this.order);
+                                server.serverGUI.updateClientStatus("Client Add word: "+word+": Successfully, even though the word already exists(meaning different)");
+                            }
                         }
                         else {
-                            printWriter.println("The dictionary doesn't have the word. Updating.");
+                            printWriter.println("The dictionary doesn't have the word. Adding the word and meaning");
                             dictionary.add(word,meaning,"input");
                             server.serverGUI.updateIpAndPort(this.order);
                             server.serverGUI.updateClientStatus("Client Add word: "+word+" : "+meaning );
@@ -147,5 +159,11 @@ public class ServerThread implements Runnable{
             }
 
         }
+    }
+    private boolean assertMeaningEquals(String word, String meaning){
+        String[] meaningFromDic = dictionary.meaning(word);
+        String meaningDic = Arrays.toString(meaningFromDic);
+        meaningDic = meaningDic.substring(1,meaningDic.length()-1).replace(",","");
+        return meaningDic.equals(meaning);
     }
 }

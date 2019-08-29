@@ -19,7 +19,11 @@ public class Dictionary {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line= null;
             while((line=reader.readLine())!=null){
-                dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
+                line.toLowerCase();
+                if(assertValidaDictionary(line.split(" ")[0])){
+                    dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
+                }
+                else  System.out.println("No such file! Use default dictionary!");
             }
         }catch (FileNotFoundException e){
             e.printStackTrace();
@@ -29,6 +33,28 @@ public class Dictionary {
             e.printStackTrace();
         }
 //        test();
+    }
+
+//    public static void main(String args[]){
+//        Dictionary dic = new Dictionary("e");
+//        dic.loadDictionary("/Users/Apple/Documents/DOCUMENTS/COMP90015 Distributed Systems/Assignment1/src/resources/dic.txt");
+////        Iterator it = dic.dictionary.entrySet().iterator();
+////        while(it.hasNext()){
+////            Map.Entry pair = (Map.Entry)it.next();
+////        }
+//    }
+    public boolean assertValidaDictionary(String input){
+        int ascii=0;
+        for(int i=0; i<input.length(); i++){
+            ascii = input.charAt(i);
+            if (ascii<97 || ascii>122){
+//                System.out.println("The word is beyond alphbet. Not an English character. " + ascii);
+                return false;
+            }
+//            System.out.println(ascii);
+//            System.out.println(input.charAt(i));
+        }
+        return true;
     }
 
     // Test if there is a word contained in the dictionary.
@@ -53,6 +79,7 @@ public class Dictionary {
         }
         return meaning;
     }
+    // Convert from String to array of String.
     private synchronized String[] formatParserForInput(String input){
         String[] tokens = input.split(" ");
         String[] meaning = new String[tokens.length];
