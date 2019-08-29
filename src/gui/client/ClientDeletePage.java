@@ -13,6 +13,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
     JOptionPane jOptionPane;
     JTextField jTextFieldWord;
     ClientGUI clientGUI;
+    JTextArea jTextArea;
     public ClientDeletePage(String function, ClientGUI clientGUI){
         super(clientGUI);
         this.clientGUI = clientGUI;
@@ -29,7 +30,9 @@ public class ClientDeletePage extends  ClientFunctionalPage {
     private void initialiseWindow(){
         add(label);
         jTextFieldWord = addTextOnField("Please enter the word here:");
+        jTextArea = new JTextArea();
         add(buttonOK);
+        add(jTextArea);
     }
     private void delete(){
         buttonOK.addActionListener(new ActionListener() {
@@ -58,6 +61,7 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                         String output = clientGUI.bufferedReader.readLine();
 //                        showResponse(output);
                         System.out.println(output);
+                        response(output);
                     }catch (IOException ee){
                         ee.printStackTrace();
                     }catch (Exception ee){
@@ -66,6 +70,10 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                 }
             }
         });
+    }
+    private void response(String output){
+        jTextArea.append("\n"+output);
+        Response response = new Response(output,clientGUI);
     }
 
     // Show the response from the server on GUI.
