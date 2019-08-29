@@ -23,7 +23,7 @@ public class DicClient {
     public static void main(String args[]){
         DicClient client = new DicClient();
         // Connect to the server.
-//        client.connect(args);
+        client.connect(args);
         // Start GUI.
         EventQueue.invokeLater(new Runnable(){
             public void run(){

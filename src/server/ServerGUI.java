@@ -1,4 +1,7 @@
 package server;
+//TODO: 接下来的实现目标： 服务器能否返回信息到Client端，
+//TODO: 以及服务器端的信息能否收到？
+//TODO: 字典能否顺利读写？？？
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,9 +45,9 @@ public class ServerGUI implements ActionListener{
     public void initialise(){
         jFrame.setLayout(new FlowLayout());
         jFrame.setSize(600,600);
-        jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.setContentPane(this.panel);
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
         jOptionPane = new JOptionPane();
         adapter = new WindowAdapter() {
             @Override
@@ -67,7 +70,6 @@ public class ServerGUI implements ActionListener{
             }
         };
         jFrame.addWindowListener(adapter);
-
 
     }
 

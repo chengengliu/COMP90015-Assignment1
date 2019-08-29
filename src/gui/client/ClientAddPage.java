@@ -14,6 +14,7 @@ public class ClientAddPage extends ClientFunctionalPage{
     JTextField jTextFieldMeaning;
     ClientGUI clientGUI;
     JOptionPane jOptionPane;
+    JTextArea response;
     WindowAdapter adapter;
 //    private final int WORD_LIMIT = 256;
     public ClientAddPage(String function, ClientGUI clientGUI){
@@ -31,11 +32,10 @@ public class ClientAddPage extends ClientFunctionalPage{
 
         super.addReturnButton(clientGUI);
         super.loadIcon();
+
         add(returnButton);
 
         setVisible(true);
-        // Safely shutdown the connection between the client and the server,
-        // if the client side is shutdown.
         add();
     }
     private void initialiseWindow(){
@@ -47,6 +47,8 @@ public class ClientAddPage extends ClientFunctionalPage{
 //        add(jTextFieldMeaning);
         add(buttonOK);
         add(textArea);
+        response = new JTextArea("This is the reponse message: \n");
+        add(response);
     }
 
     @Override
@@ -96,7 +98,8 @@ public class ClientAddPage extends ClientFunctionalPage{
                         System.out.println("Meaning sent to the server: "+meaning);
                         // Retrieve any messages from the server and set it to the GUI.
                         String output = clientGUI.bufferedReader.readLine();
-                        System.out.println("Add output:"+output);
+//                        System.out.println("Add output:"+output);
+                        response(output);
                     } catch (IOException ee){
                         ee.printStackTrace();
                     } catch (Exception ee){
@@ -108,8 +111,13 @@ public class ClientAddPage extends ClientFunctionalPage{
 
         JOptionPane jOptionPane = new JOptionPane();
 
-
     }
+    private void response(String output){
+        response.append(output);
+        Response response = new Response(output,clientGUI);
+    }
+
+
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();

@@ -57,7 +57,6 @@ public class ClientDeletePage extends  ClientFunctionalPage {
                         // Return message to be added in the GUI later
                         String output = clientGUI.bufferedReader.readLine();
 //                        showResponse(output);
-                        ResponsePage responsePage = new ResponsePage(output);
                         System.out.println(output);
                     }catch (IOException ee){
                         ee.printStackTrace();
