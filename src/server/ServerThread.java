@@ -131,6 +131,8 @@ public class ServerThread implements Runnable{
                             e.printStackTrace();
                             System.out.println("Outputstream not closing correctly");
                         }
+                        server.serverGUI.updateIpAndPort(this.order);
+                        server.serverGUI.updateClientStatus("The client has disconnected");
                         Thread.currentThread().interrupt();
                         return;
                 }
