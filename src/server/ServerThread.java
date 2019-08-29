@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ServerThread implements Runnable{
     private Dictionary dictionary;
@@ -103,12 +104,17 @@ public class ServerThread implements Runnable{
                         break;
                     case "Shutdown":
                         server.clientDisconnect();
+                        System.out.println("SERVER SHUT DOWN TRIGERRED");
                         printWriter.close();
                         try {
                             breader.close();
                             client.close();
+                        }catch (SocketException e){
+                            e.printStackTrace();
+                            System.out.println("Socket close warnning");
                         }catch (IOException e){
                             e.printStackTrace();
+                            System.out.println("Outputstream not closing correctly");
                         }
                         Thread.currentThread().interrupt();
                         return;
