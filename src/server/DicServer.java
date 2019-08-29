@@ -37,7 +37,6 @@ public class DicServer {
 
 
         dicServer.validatePortNumber(args);
-        System.out.println(args[1]);
         dicServer.validateAddress(args);
         dictionary = new Dictionary(args[1]);
 

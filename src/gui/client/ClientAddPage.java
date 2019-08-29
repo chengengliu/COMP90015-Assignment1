@@ -67,42 +67,53 @@ public class ClientAddPage extends ClientFunctionalPage{
                 // variable yes is whether Yes/No.
                 String word=null, meaning=null;
                 int yes = addSecondConfirm();
-                try{
-
-                    word = jTextFieldWord.getText().trim().toLowerCase();
-                    meaning = jTextFieldMeaning.getText().toLowerCase();
-
-                    // What if the user enter?????
-                    // After testing it seems all good. Enter will not effect the String.
-//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
-//                    System.out.println(jTextFieldMeaning.getText()); // meaning
-
-                    if(word.equals("please enter the word here")|| word.equals("")) {
-                        System.out.println("The word you entered is not correct");
-                        throw new EmptyInputException();
-                    }
-                    if(meaning.equals("please enter the meaning here")|| meaning.equals("")) {
-                        System.out.println("The meaning you entered is not correct");
-                        throw new EmptyInputException();
-                    }
-
-                } catch (EmptyInputException ee) {
-                    ee.printStackTrace();
-                } catch (Exception ee){
-                    ee.printStackTrace();
-                }
+//                try{
+//
+//
+//
+//                } catch (EmptyInputException ee) {
+//                    ee.printStackTrace();
+//                } catch (Exception ee){
+//                    ee.printStackTrace();
+//                }
                 // The user has confirmed the inputs and the inputs are in correct format.
                 if(yes == JOptionPane.YES_OPTION){
                     try{
-                        clientGUI.printWriter.println("Add");
-                        clientGUI.printWriter.println(word);
-                        clientGUI.printWriter.println(meaning);
-                        System.out.println("Meaning sent to the server: "+meaning);
-                        // Retrieve any messages from the server and set it to the GUI.
-                        String output = clientGUI.bufferedReader.readLine();
-//                        System.out.println("Add output:"+output);
-                        response(output);
+
+                        word = jTextFieldWord.getText().trim().toLowerCase();
+                        meaning = jTextFieldMeaning.getText().toLowerCase();
+
+                        // What if the user enter?????
+                        // After testing it seems all good. Enter will not effect the String.
+//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
+//                    System.out.println(jTextFieldMeaning.getText()); // meaning
+
+                        if(word.equals("please enter the word here")|| word.equals("")) {
+                            System.out.println("");
+                            response("The word you entered is not correct");
+                            clientGUI.printWriter.println("AddFail");
+                            clientGUI.printWriter.println(" ");
+                            throw new EmptyInputException();
+                        }
+                        else if(meaning.equals("please enter the meaning here")|| meaning.equals("")) {
+                            System.out.println();
+                            response("The meaning you entered is not correct");
+                            clientGUI.printWriter.println("AddFail");
+                            clientGUI.printWriter.println(word);
+                            throw new EmptyInputException();
+                        }
+                        else {
+                            clientGUI.printWriter.println("Add");
+                            clientGUI.printWriter.println(word);
+                            clientGUI.printWriter.println(meaning);
+                            System.out.println("Meaning sent to the server: "+meaning);
+                            // Retrieve any messages from the server and set it to the GUI.
+                            String output = clientGUI.bufferedReader.readLine();
+                            response(output);
+                        }
                     } catch (IOException ee){
+                        ee.printStackTrace();
+                    } catch (EmptyInputException ee){
                         ee.printStackTrace();
                     } catch (Exception ee){
                         ee.printStackTrace();

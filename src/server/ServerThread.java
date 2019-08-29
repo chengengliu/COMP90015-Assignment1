@@ -114,8 +114,16 @@ public class ServerThread implements Runnable{
                         else {
                             printWriter.println("The word doesn't exist. Error!");
                             server.serverGUI.updateIpAndPort(this.order);
-                            server.serverGUI.updateClientStatus("Client tries to Delete word: " + word+" , but failed. The wrod not exist!");
+                            server.serverGUI.updateClientStatus("Client tries to Delete word: " + word+" , but failed. The word not exist!");
                         }
+                        break;
+                    case "AddFail":
+                        server.serverGUI.updateIpAndPort(this.order);
+                        if(word.equals(" ")){
+                            server.serverGUI.updateClientStatus("Client tries to Add word: "+word+" , but failed. No word detected!");
+                        }
+                        else  server.serverGUI.updateClientStatus("Client tries to Add word: "+word+" , but failed. No meaning detected!");
+
                         break;
                     case "Shutdown":
                         server.clientDisconnect();
