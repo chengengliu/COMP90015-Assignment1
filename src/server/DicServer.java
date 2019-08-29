@@ -135,7 +135,7 @@ public class DicServer {
             }
             else {
                 serverGUI.serverStatus.append("\nThere are clients online");
-                serverGUI.serverStatus.append("\n"+clientsNumber+"still want to connect");
+                serverGUI.serverStatus.append("\n"+clientsNumber+" clients still remain connected");
                 serverGUI.serverStatus.append("\nPlease shutdwon later");
             }
         }catch (IOException e){

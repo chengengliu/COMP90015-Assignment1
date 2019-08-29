@@ -18,17 +18,18 @@ public class ServerGUI implements ActionListener{
     private PrintWriter printWriter;
     private JFrame jFrame;
     private JPanel panel;
-    private JLabel clientIP;
-    private JLabel clientPort;
-    private JLabel clientStatus;
     private JTextArea textIP;
     private JTextArea textPort;
     private JTextArea textStatus;
     private JButton buttonShutdown;
     public JTextArea serverStatus;
+    private JLabel clientIP;
+    private JLabel clientPort;
+    private JLabel clientStatus;
     private DicServer server;
     private WindowAdapter adapter;
     private JOptionPane jOptionPane;
+    private JScrollPane scrollPane;
 
     public ServerGUI(DicServer server){
         jFrame = new JFrame();
@@ -71,9 +72,11 @@ public class ServerGUI implements ActionListener{
             }
         };
         jFrame.addWindowListener(adapter);
+
     }
     public void updateIpAndPort(int order){
         textIP.append("\n"+server.getIpAndPort().get(order).getKey()); // Key is ip
+        System.out.println(server.getIpAndPort().get(order).getKey());
         textPort.append("\n"+server.getIpAndPort().get(order).getValue()); //value is port
         textStatus.append("\n");
     }
@@ -90,5 +93,9 @@ public class ServerGUI implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent){
 
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

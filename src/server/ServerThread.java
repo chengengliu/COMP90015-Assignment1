@@ -62,11 +62,11 @@ public class ServerThread implements Runnable{
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }
-                                System.out.println("Word looking for meaning is: " + word);
-                                if(i!=0) System.out.println("Word meaning is : " + dictionary.meaning(word)[i-1]);
+//                                System.out.println("Word looking for meaning is: " + word);
+//                                if(i!=0) System.out.println("Word meaning is : " + dictionary.meaning(word)[i-1]);
                             }
                             server.serverGUI.updateIpAndPort(this.order);
-                            server.serverGUI.updateClientStatus("Client Search word: "+word);
+                            server.serverGUI.updateClientStatus("Client Search word: "+word+" Successfully");
                         }
                         else {
                             // Need to report on client side as well.
@@ -105,15 +105,15 @@ public class ServerThread implements Runnable{
                             }
                         }
                         else {
-                            printWriter.println("The dictionary doesn't have the word. Adding the word and meaning");
+                            printWriter.println("The dictionary doesn't have the word. Adding the word and meaning successfully");
                             dictionary.add(word,meaning,"input");
                             server.serverGUI.updateIpAndPort(this.order);
                             server.serverGUI.updateClientStatus("Client Add word: "+word+" : "+meaning );
                         }
-                        for(int i=0; i<dictionary.meaning(word).length; i++){
-                            System.out.println("To make sure the meaning is updated correctly: "+dictionary.meaning(word)[i]);
-                        }
-                        System.out.println(meaning);
+//                        for(int i=0; i<dictionary.meaning(word).length; i++){
+//                            System.out.println("To make sure the meaning is updated correctly: "+dictionary.meaning(word)[i]);
+//                        }
+//                        System.out.println(meaning);
                         break;
                     case "Delete":
                         if(dictionary.contain(word)){
@@ -121,7 +121,6 @@ public class ServerThread implements Runnable{
                             dictionary.delete(word);
                             server.serverGUI.updateIpAndPort(this.order);
                             server.serverGUI.updateClientStatus("Client Delete word: " + word+" successfully");
-
                         }
                         else {
                             printWriter.println("The word doesn't exist. Error!");
