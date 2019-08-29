@@ -78,12 +78,6 @@ public class ClientDeletePage extends  ClientFunctionalPage {
         super.response(output);
     }
 
-    // Show the response from the server on GUI.
-    private void showResponse(String response){
-        JTextArea jTextArea = new JTextArea(response);
-        jTextArea.setBounds(400,400,200,20);
-        add(jTextArea);
-    }
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();

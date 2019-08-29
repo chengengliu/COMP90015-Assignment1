@@ -13,7 +13,7 @@ public class Dictionary {
         loadDictionary(path);
 
     }
-    public void loadDictionary(String path){
+    private void loadDictionary(String path){
         try{
             File file = new File(path);
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -23,14 +23,17 @@ public class Dictionary {
                 if(assertValidaDictionary(line.split(" ")[0])){
                     dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
                 }
-                else  System.out.println("No such file! Use default dictionary!");
+                else {
+                    System.out.println("Dictionary Format wrong! Using built-in dictioanry now!");
+                    defaultDictionary();
+                }
             }
         }catch (FileNotFoundException e){
             e.printStackTrace();
             System.out.println("No such file! Use default dictionary!");
-            defaultDictionary();
         }catch (IOException e){
             e.printStackTrace();
+            System.out.println("No such file! Use default dictionary!");
         }
 //        test();
     }
@@ -43,7 +46,7 @@ public class Dictionary {
 ////            Map.Entry pair = (Map.Entry)it.next();
 ////        }
 //    }
-    public boolean assertValidaDictionary(String input){
+    private boolean assertValidaDictionary(String input){
         int ascii=0;
         for(int i=0; i<input.length(); i++){
             ascii = input.charAt(i);
@@ -114,7 +117,7 @@ public class Dictionary {
         return dictionary;
     }
 
-    public void defaultDictionary(){
+    private void defaultDictionary(){
         String word1 = "hello exclamation: hello; exclamation: hallo; exclamation: hullo";
         String word2 = "apple noun noun: apple; plural noun: apples; noun: apple tree; plural noun: apple trees";
         String word3 = "great adjective adjective: great; comparative adjective: greater; superlative adjective: greatest";

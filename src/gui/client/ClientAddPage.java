@@ -67,26 +67,11 @@ public class ClientAddPage extends ClientFunctionalPage{
                 // variable yes is whether Yes/No.
                 String word=null, meaning=null;
                 int yes = addSecondConfirm();
-//                try{
-//
-//
-//
-//                } catch (EmptyInputException ee) {
-//                    ee.printStackTrace();
-//                } catch (Exception ee){
-//                    ee.printStackTrace();
-//                }
-                // The user has confirmed the inputs and the inputs are in correct format.
                 if(yes == JOptionPane.YES_OPTION){
                     try{
 
                         word = jTextFieldWord.getText().trim().toLowerCase();
                         meaning = jTextFieldMeaning.getText().toLowerCase();
-
-                        // What if the user enter?????
-                        // After testing it seems all good. Enter will not effect the String.
-//                    System.out.println(jTextFieldWord.getText()); // word entered by the user
-//                    System.out.println(jTextFieldMeaning.getText()); // meaning
 
                         if(word.equals("please enter the word here")|| word.equals("")) {
                             System.out.println("");
@@ -121,14 +106,10 @@ public class ClientAddPage extends ClientFunctionalPage{
                 }
             }
         });
-
-        JOptionPane jOptionPane = new JOptionPane();
-
     }
     @Override
     public void response(String output){
         response.append(output);
-//        Response response = new Response(output,clientGUI);
         super.response(output);
     }
 
