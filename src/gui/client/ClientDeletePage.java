@@ -71,9 +71,11 @@ public class ClientDeletePage extends  ClientFunctionalPage {
             }
         });
     }
-    private void response(String output){
+    @Override
+    public void response(String output){
         jTextArea.append("\n"+output);
-        Response response = new Response(output,clientGUI);
+//        Response response = new Response(output,clientGUI);
+        super.response(output);
     }
 
     // Show the response from the server on GUI.

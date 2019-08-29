@@ -13,6 +13,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
     JButton returnButton;
     WindowAdapter adapter;
     JOptionPane jOptionPane;
+    ClientGUI clientGUI;
 
     public ClientFunctionalPage(ClientGUI clientGUI){
         setLayout(new FlowLayout());
@@ -21,6 +22,7 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         buttonOK = new JButton();
         setSize(400, 400);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.clientGUI = clientGUI;
         jOptionPane = new JOptionPane();
         adapter = new WindowAdapter() {
             @Override
@@ -55,6 +57,9 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         add(buttonOK);
 
 //        add(labelResult);
+    }
+    public void response(String output){
+        Response response = new Response(output,clientGUI);
     }
 
     @Override

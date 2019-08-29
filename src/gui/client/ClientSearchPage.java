@@ -13,6 +13,7 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
     JOptionPane jOptionPane;
     JTextField jTextFieldWord;
     ClientGUI clientGUI;
+    JTextArea jTextArea;
     public ClientSearchPage(String function, ClientGUI clientGUI){
         super(clientGUI);
         this.clientGUI =clientGUI;
@@ -31,7 +32,9 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
     private void initialiseWindow(){
         add(label);
         jTextFieldWord = addTextOnField("Please enter the word here:");
+        jTextArea = new JTextArea("This is the response message:");
         add(buttonOK);
+        add(jTextArea);
     }
 
     private void search(){
@@ -71,9 +74,11 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
                         }
                         else {
                             result = "There is no such word.";
-                            clientGUI.bufferedReader.readLine();
+                            clientGUI.bufferedReader.readLine(); // have to skip the last line, when the returning message is "not found"
                         }
                         System.out.println("This is the search result:" + result);
+                        response(result);
+
                     }catch (IOException ee){
                         ee.printStackTrace();
                     }catch (Exception ee){
@@ -87,6 +92,11 @@ public class ClientSearchPage extends ClientFunctionalPage implements  PageFunct
         String str = Arrays.toString(output);
         str = str.substring(1,str.length()-1).replace(",","");
         return  str;
+    }
+    @Override
+    public void response(String output){
+        jTextArea.append("\n"+output);
+        super.response(output);
     }
 
     @Override

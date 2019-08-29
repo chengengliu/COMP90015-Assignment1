@@ -112,9 +112,11 @@ public class ClientAddPage extends ClientFunctionalPage{
         JOptionPane jOptionPane = new JOptionPane();
 
     }
-    private void response(String output){
+    @Override
+    public void response(String output){
         response.append(output);
-        Response response = new Response(output,clientGUI);
+//        Response response = new Response(output,clientGUI);
+        super.response(output);
     }
 
 
