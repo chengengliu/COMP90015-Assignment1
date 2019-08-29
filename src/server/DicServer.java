@@ -1,12 +1,15 @@
 package server;
 
 import exceptions.PortNumberOutOfBounds;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class DicServer {
     private int port = 12345; // default value
@@ -17,6 +20,7 @@ public class DicServer {
     public static final int WORD_ROW = 5;
     private static Dictionary dictionary;  // Not too sure if it is static or non-static.
     public ServerGUI serverGUI;
+    private HashMap<Integer, Pair<InetAddress,Integer>> map;
 
     public DicServer(){
 
@@ -27,8 +31,10 @@ public class DicServer {
 
 
         DicServer dicServer = new DicServer();
+        dicServer.map =new HashMap<>();
         dicServer.serverGUI = new ServerGUI(dicServer);
         dicServer.serverGUI.getFrame().setVisible(true);
+
 
         dicServer.validatePortNumber(args);
         dictionary = new Dictionary(args[1]);
@@ -99,8 +105,13 @@ public class DicServer {
                 client = listening.accept();
                 clientsNumber++;
                 System.out.println("Now the server and the client have established the connection. ");
+
+                // Register current ip and port and notify the server GUI to update.
+                registerIpAndPort(client,clientsNumber);
+                serverGUI.updateIpAndPort(clientsNumber);
+
                 // Threading start.
-                ServerThread serverThread = new ServerThread(dictionary,this, client);
+                ServerThread serverThread = new ServerThread(dictionary,this, client,clientsNumber);
                 new Thread(serverThread).start();
             } catch (IOException e){
                 e.printStackTrace();
@@ -111,6 +122,17 @@ public class DicServer {
             }
         }
     }
+
+    private void registerIpAndPort(Socket client, int order){
+        InetAddress address = client.getInetAddress();
+        int port = client.getPort();
+        Pair<InetAddress, Integer> pair = new Pair<>(address, port);
+        map.put(order,pair);
+    }
+    public HashMap<Integer,Pair<InetAddress,Integer>> getIpAndPort(){
+        return this.map;
+    }
+
 
     public void clientDisconnect(){
         clientsNumber--;
@@ -129,13 +151,6 @@ public class DicServer {
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    private static void defaultHostHandle(){
-
-    }
-    private void startServerGUI(){
-
     }
 }
 

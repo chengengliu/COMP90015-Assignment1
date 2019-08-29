@@ -41,7 +41,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="test"/>
+          <text value=""/>
           <wrapStyleWord value="true"/>
         </properties>
       </component>
@@ -52,7 +52,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="test"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="2af22" class="javax.swing.JTextArea" binding="textStatus">
@@ -62,7 +62,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="test"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="f6ef8" class="javax.swing.JButton" binding="buttonShutdown">

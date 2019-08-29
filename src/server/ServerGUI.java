@@ -71,7 +71,16 @@ public class ServerGUI implements ActionListener{
             }
         };
         jFrame.addWindowListener(adapter);
-
+    }
+    public void updateIpAndPort(int order){
+        textIP.append("\n"+server.getIpAndPort().get(order).getKey()); // Key is ip
+        textPort.append("\n"+server.getIpAndPort().get(order).getValue()); //value is port
+        textStatus.append("\n");
+    }
+    public void updateClientStatus(String status){
+        textIP.append("\n");
+        textPort.append("\n");
+        textStatus.append("\n" + status);
     }
 
     public JFrame getFrame(){
