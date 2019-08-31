@@ -62,10 +62,19 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
 
 //        add(labelResult);
     }
+
+    /**
+     *  Instantiate a new Response object and create the class with response message, rendering a pop-up page.
+     * @param output: response message that needs to render.
+     */
     public void response(String output){
         Response response = new Response(output,clientGUI);
     }
 
+    /**
+     * Add a return button on the page, with an action listener attached.
+     * @param clientGUI: client side GUI
+     */
     @Override
     public void addReturnButton(ClientGUI clientGUI) {
         returnButton = new JButton();
@@ -80,6 +89,12 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
 
     }
 
+    /**
+     * This feature gives the client clearer intuition of what they need to do. The instruction will appear
+     * within the jtextField. When the mouse is moving out of the text field, the message will disappear.
+     * @param text Add the text on the text field.
+     * @return a jTextField object
+     */
     @Override
     public JTextField addTextOnField(String text) {
 
@@ -99,6 +114,10 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
         add(meaning);
         return meaning;
     }
+
+    /**
+     * Load Icon for return button and checked button.
+     */
     public void loadIcon(){
         Image returnImage = new ImageIcon(this.getClass().getResource("/resources/return.png")).getImage();
         returnButton.setIcon(new ImageIcon(returnImage));
@@ -107,6 +126,10 @@ public class ClientFunctionalPage extends JFrame implements PageFunction{
 
     }
 
+    /**
+     * Set font.
+     * @return
+     */
     public Font setFont(){
         Font font = new Font("Arial", Font.ITALIC, 15);
         return font;

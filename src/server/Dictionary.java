@@ -44,30 +44,25 @@ public class Dictionary {
 //        test();
         }
     }
-
-//    public static void main(String args[]){
-//        Dictionary dic = new Dictionary("e");
-//        dic.loadDictionary("/Users/Apple/Documents/DOCUMENTS/COMP90015 Distributed Systems/Assignment1/src/resources/dic.txt");
-////        Iterator it = dic.dictionary.entrySet().iterator();
-////        while(it.hasNext()){
-////            Map.Entry pair = (Map.Entry)it.next();
-////        }
-//    }
     private boolean assertValidaDictionary(String input){
         int ascii=0;
         for(int i=0; i<input.length(); i++){
             ascii = input.charAt(i);
+            // If it is non-alphabetical character(not within the range of a-z)
             if (ascii<97 || ascii>122){
-//                System.out.println("The word is beyond alphbet. Not an English character. " + ascii);
                 return false;
             }
-//            System.out.println(ascii);
-//            System.out.println(input.charAt(i));
         }
         return true;
     }
 
     // Test if there is a word contained in the dictionary.
+
+    /**
+     * If the current dictionary contains the searching word.
+     * @param word target of searching
+     * @return true: exist flae: not exist
+     */
     public synchronized boolean contain(String word){
         return (dictionary.get(word))!=null;
     }
@@ -104,9 +99,22 @@ public class Dictionary {
         return meaning;
     }
      // This will be the standard format.
+
+    /**
+     * Retrieve the meaning of query word.
+     * @param word target
+     * @return meaning of the word
+     */
     public synchronized String[] meaning(String word){
         return dictionary.get(word);
     }
+
+    /**
+     * Add a word with its meaning into the dictionary.
+     * @param word word
+     * @param meaning the meaning of the word
+     * @param flag specify which parser it needs.
+     */
     public synchronized void add(String word, String meaning,String flag){
 //        dictionary.put(word,formatParserForMeaning(meaning));
         switch (flag){
@@ -117,9 +125,19 @@ public class Dictionary {
                 dictionary.put(word,formatParserForMeaning(meaning));
         }
     }
+
+    /**
+     * Delete the word from the dictionary.
+     * @param word the word you want to delete
+     */
     public synchronized void delete(String word){
         dictionary.remove(word);
     }
+
+    /**
+     * Return a dictionary.
+     * @return dictionary
+     */
     public HashMap<String, String[]> getDictionary() {
         return dictionary;
     }

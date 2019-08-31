@@ -12,6 +12,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Response page. It is needed for a clearer representation for the returning message.
+ * It will be a pop-up field.
+ */
 public class Response {
     private JPanel panel;
     private JTextArea responseHeader;

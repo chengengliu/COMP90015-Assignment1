@@ -12,6 +12,10 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
 
+/**
+ * Thread created for each client connection. Holds the communication between the client and the dictioanry, calculation
+ * functions. Most important class running, and only killed when the client closes the connection.
+ */
 public class ServerThread implements Runnable{
     private Dictionary dictionary;
     private Socket client;
@@ -35,6 +39,10 @@ public class ServerThread implements Runnable{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Listening any actions performed by the client, perfomr actions and interacts with the dictionary.
+     */
     @Override
     public void run() {
         while (true){

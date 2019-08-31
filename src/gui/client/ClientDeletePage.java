@@ -12,7 +12,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * Delete page to render. Able to warn the user before send the word and meaning to the server.
+ * Able to warn the user before exiting the client side.
+ */
 public class ClientDeletePage extends  ClientFunctionalPage {
     JOptionPane jOptionPane;
     JTextField jTextFieldWord;
@@ -75,13 +78,21 @@ public class ClientDeletePage extends  ClientFunctionalPage {
             }
         });
     }
+
+    /**
+     * Initialise a response page.
+     * @param output: response message that needs to render.
+     */
     @Override
     public void response(String output){
         jTextArea.append("\n"+output);
 //        Response response = new Response(output,clientGUI);
         super.response(output);
     }
-
+    /**
+     * Add a pop-up confirmation page right after the user clicks button OK.
+     * @return if clicks: YES_OPTION
+     */
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();

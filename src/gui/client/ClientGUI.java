@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Client side main GUI.
+ */
 public class ClientGUI {
     private JButton buttonSearch;
     private JPanel panelMain;
@@ -37,6 +40,10 @@ public class ClientGUI {
         this.printWriter = printWriter;
     }
 
+    /**
+     * Prepare for the three main functional pages.
+     * @param clientGUI client side GUI
+     */
     public void addListener(ClientGUI clientGUI){
         buttons = new HashMap<String, JButton>();
         buttons.put("Search", buttonSearch);
@@ -76,6 +83,10 @@ public class ClientGUI {
         }
     }
 
+    /**
+     * Initialise the GUI.
+     * @param clientGUI return the GUI.
+     */
     public void initialiseGUI(ClientGUI clientGUI) {
         jFrame = new JFrame("HelloDS");
         jFrame.setSize(600,600);
@@ -118,6 +129,10 @@ public class ClientGUI {
         jFrame.setVisible(true);
     }
 
+    /**
+     * Return the main jframe.
+     * @return  current frame
+     */
     public JFrame getjFrame() {
         return jFrame;
     }

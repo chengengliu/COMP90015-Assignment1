@@ -15,6 +15,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
+/**
+ * Main driver function for the server side.
+ * Hold the most responsibility of error handling, format checking, thread initialisation etc.
+ * Severe functionality such as shutting the system, is controlled by the driver as well.
+ */
 public class DicServer {
     private int port = 12345; // default value
     private String address =null;
@@ -30,7 +35,10 @@ public class DicServer {
 
     }
 
-
+    /**
+     * Main function for the system.
+     * @param args command line arguments: [port_number] [path_of_dictionary]
+     */
     public static void main (String args[]){
 
 
@@ -125,14 +133,26 @@ public class DicServer {
         Pair<InetAddress, Integer> pair = new Pair<>(address, port);
         map.put(order,pair);
     }
+
+    /**
+     * Return the Ip and port of the client. The map contains the order of the client(for later
+     * check if all clients disconnects from the server).
+     * @return Hashmap of client order number and ip, port.
+     */
     public HashMap<Integer,Pair<InetAddress,Integer>> getIpAndPort(){
         return this.map;
     }
 
-
+    /**
+     * Method used by the client side to notify the server that the client has shut down the connection.
+     */
     public void clientDisconnect(){
         clientsNumber--;
     }
+
+    /**
+     * Shut down the server and close the server side.
+     */
     public void serverShutdown(){
         try {
             if(clientsNumber == 0){

@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.io.IOException;
 
+/**
+ * Add page to render. Able to warn the user before send the word and meaning to the server.
+ * Able to warn the user before exiting the client side.
+ */
 public class ClientAddPage extends ClientFunctionalPage{
     JTextArea textArea;
     JTextField jTextFieldWord;
@@ -111,13 +115,21 @@ public class ClientAddPage extends ClientFunctionalPage{
             }
         });
     }
+
+    /**
+     * Initialise a response page.
+     * @param output: response message that needs to render.
+     */
     @Override
     public void response(String output){
         response.append(output);
         super.response(output);
     }
 
-
+    /**
+     * Add a pop-up confirmation page right after the user clicks button OK.
+     * @return if clicks: YES_OPTION
+     */
     @Override
     public int addSecondConfirm(){
         jOptionPane = new JOptionPane();

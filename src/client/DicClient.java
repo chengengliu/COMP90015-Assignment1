@@ -15,8 +15,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-// This is the client side driver function.
-// remember to EventQueue.invokeLater. Calculation threads block until GUI is updated.
+
+/**
+ * This is the client side driver function. remember to EventQueue.invokeLater. Calculation
+ * threads block until GUI is updated.
+ */
 public class DicClient {
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
@@ -24,6 +27,10 @@ public class DicClient {
     private DicClient(){
     }
 
+    /**
+     * Driver function for the client side.
+     * @param args  receives command line arguments. [server_address/IP] [server_port]
+     */
     public static void main(String args[]){
         DicClient client = new DicClient();
         // Connect to the server.

@@ -14,6 +14,10 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
+/**
+ * Server side GUI. Able to monitor the IP, Port and client status(action).
+ * Able to shut down the whole system(except when there are clients still connecting to the server)
+ */
 public class ServerGUI implements ActionListener{
     private BufferedReader bufferedReader;
     private PrintWriter printWriter;
@@ -45,6 +49,10 @@ public class ServerGUI implements ActionListener{
             }
         });
     }
+
+    /**
+     * Initialise the server side GUI.
+     */
     public void initialise(){
         jFrame.setLayout(new FlowLayout());
         jFrame.setSize(600,600);
@@ -75,18 +83,32 @@ public class ServerGUI implements ActionListener{
         jFrame.addWindowListener(adapter);
 
     }
+
+    /**
+     * Update the IP and port of the clients.
+     * @param order order of the client(receive from thread)
+     */
     public void updateIpAndPort(int order){
         textIP.append("\n"+server.getIpAndPort().get(order).getKey()); // Key is ip
         System.out.println(server.getIpAndPort().get(order).getKey());
         textPort.append("\n"+server.getIpAndPort().get(order).getValue()); //value is port
         textStatus.append("\n");
     }
+
+    /**
+     * Update the client actions
+     * @param status status of the client(receive from thread)
+     */
     public void updateClientStatus(String status){
         textIP.append("\n");
         textPort.append("\n");
         textStatus.append("\n" + status);
     }
 
+    /**
+     * Return the server side GUI
+     * @return return server side GUI
+     */
     public JFrame getFrame(){
         return this.jFrame;
     }
