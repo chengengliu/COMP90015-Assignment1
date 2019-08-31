@@ -9,33 +9,36 @@ public class Dictionary {
     public Dictionary(String path){
         // For now let's use an empty dictionary for test use.
         dictionary = new HashMap<String, String[]>();
-//        defaultDictionary();
+        // At the stage, the file is guaranteed to exist by the DicServer.
         loadDictionary(path);
-
     }
     private void loadDictionary(String path){
-        try{
-            File file = new File(path);
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line= null;
-            while((line=reader.readLine())!=null){
-                line.toLowerCase();
-                if(assertValidaDictionary(line.split(" ")[0])){
-                    dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
-                }
-                else {
-                    System.out.println("Dictionary Format wrong! Using built-in dictioanry now!");
-                    defaultDictionary();
-                }
-            }
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-            System.out.println("No such file! Use default dictionary!");
-        }catch (IOException e){
-            e.printStackTrace();
-            System.out.println("No such file! Use default dictionary!");
+        if(path == null){
+            defaultDictionary();
         }
+        else{
+            try{
+                File file = new File(path);
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line= null;
+                while((line=reader.readLine())!=null){
+                    line.toLowerCase();
+                    if(assertValidaDictionary(line.split(" ")[0])){
+                        dictionary.put(line.split(" ")[0],formatParserForMeaning(line));
+                    }
+                    else {
+                        System.out.println("Dictionary Format wrong! Using built-in dictioanry now!");
+                    }
+                }
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+                System.out.println("No such file! Use default dictionary!");
+            }catch (IOException e){
+                e.printStackTrace();
+                System.out.println("No such file! Use default dictionary!");
+            }
 //        test();
+        }
     }
 
 //    public static void main(String args[]){

@@ -38,7 +38,7 @@ public class DicServer {
 
         dicServer.validatePortNumber(args);
         dicServer.validateAddress(args);
-        dictionary = new Dictionary(args[1]);
+//        dictionary = new Dictionary(args[1]);
 
         dicServer.connect();
     }
@@ -73,8 +73,10 @@ public class DicServer {
             File dicFile = new File(address);
             if(!dicFile.exists()) throw new FileNotFoundException();
             if(args.length!=2) throw new ArrayIndexOutOfBoundsException();
+            DicServer.dictionary = new Dictionary(args[1]);
         } catch (FileNotFoundException e){
             System.out.println("File not found in the path. Check the path first.");
+            DicServer.dictionary = new Dictionary(null); // File not found. Use default dictionary.
             e.printStackTrace();
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Please make sure feed the command line with two arguments.");
