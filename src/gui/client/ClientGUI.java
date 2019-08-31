@@ -1,8 +1,8 @@
+/*
+* Author: Chengeng Liu
+* Student ID: 813174
+* */
 package gui.client;
-//TODO: 1. Client GUI还需要美化和修改。 比如： 窗口大小调整，加上图片。已完成。
-//TODO: 2. Client GUI 之间的联动也有问题， 应该是打开一个，之前的关闭，return 会关闭当前窗口，打开之前的窗口。已完成。
-//TODO: 3. Server Side GUI
-
 // Images credit: Icon made by Google (https://www.flaticon.com/authors/google) from www.flaticon.com
 
 import javax.swing.*;

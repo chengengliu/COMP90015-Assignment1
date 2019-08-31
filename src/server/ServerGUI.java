@@ -1,7 +1,8 @@
+/*
+* Author: Chengeng Liu
+* Student ID: 813174
+* */
 package server;
-//TODO: 接下来的实现目标： 服务器能否返回信息到Client端. 已完成
-//TODO: 以及服务器端的信息能否收到？正在写。
-//TODO: 字典能否顺利读写？？？
 
 
 import javax.swing.*;
