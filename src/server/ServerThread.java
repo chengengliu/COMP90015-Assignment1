@@ -116,12 +116,14 @@ public class ServerThread implements Runnable{
 //                        System.out.println(meaning);
                         break;
                     case "Delete":
+                        // The word exists, delete successful
                         if(dictionary.contain(word)){
                             printWriter.println("Delete the word :" + word);
                             dictionary.delete(word);
                             server.serverGUI.updateIpAndPort(this.order);
                             server.serverGUI.updateClientStatus("Client Delete word: " + word+" successfully");
                         }
+                        // The word not found. Raise exception
                         else {
                             printWriter.println("The word doesn't exist. Error!");
                             server.serverGUI.updateIpAndPort(this.order);
